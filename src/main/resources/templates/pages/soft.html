@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>杭州地铁SG8-2建筑施工大脑
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../css/common/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--datatables-->
+    <link href="../plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <!--jquery-colorpicker-->
+    <link rel="stylesheet" href="../plugins/jquery-bigcolorpicker/css/jquery.bigcolorpicker.css">
+    <!-- animate -->
+    <link rel="stylesheet" href="../css/common/animate.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <!--[endif]-->
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/soft/soft.css" rel="stylesheet">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition fixed">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-menu">
+                <a href="./index.html" class="btn btn-menu"><i class="iconfont icon-icon-test"></i>首页</a>
+                <a href="./video.html" class="btn btn-menu"><i class="iconfont icon-bofang1"></i>实时视频</a>
+                <a href="./staff.html" class="btn btn-menu"><i class="iconfont icon-renyuanxiaozu"></i>人员管理</a>
+                <a href="./attendManage.html" class="btn btn-menu"><i class="iconfont icon-rili"></i>考勤管理</a>
+                <a href="./equipment.html" class="btn btn-menu"><i class="fa fa-file-text-o"  style="margin-right: 5px;"></i>设备管理</a>
+                <a href="./alarm.html" class="btn btn-menu"><i class="iconfont icon-yigaojing"></i>报警记录</a>
+                <a href="javascript:void (0)" class="btn btn-menu btn-active"><i class="iconfont icon-anquan"></i>环境安全</a>
+                <a href="./vehicle.html" class="btn btn-menu"><i class="iconfont icon-cheliangguanli"></i>车辆管理</a>
+                <a href="./dataEntery.html" class="btn btn-menu"><i class="iconfont icon-5"></i>数据录入</a>
+                <a href="./measure.html" class="btn btn-menu"><i class="iconfont icon-cehuichengguoguanli"></i>实时监测</a>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="sign-out"><i class="fa fa-sign-out">退出</i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <section class="content">
+                <ul class="nav nav-tabs vertical-spacing">
+                    <li class="active"><a href="#environmentSoft" data-toggle="tab"> 环境安全 </a></li>
+                    <li><a href="#ditchSoft" data-toggle="tab"> 基坑安全 </a></li>
+                    <li><a href="#water-level" data-toggle="tab"> 水位监测 </a></li>
+                    <li><a href="#Posture-alarm" data-toggle="tab">盾构姿态报警</a></li>
+
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="environmentSoft">
+                        <div class="row vertical-spacing">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-record" onclick="Soft.setAlarmValue(event)">
+                                    <i class="iconfont icon-5"></i>设置报警值
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="PM2.5" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="PM10" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container" id="noises">
+                                    <div id="noise" class="soft-chart vertical-spacing"></div>
+                                    <table class="layui-table tables" width="575" height="365"  style="display: none; ">
+                                        <thead>
+                                        <tr class="top-table">
+                                            <th>时间</th>
+                                            <th>风向</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="biaodan">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="temperature" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="humidity" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="windSpeed" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="windPower" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="ditchSoft">
+                        <div class="row vertical-spacing">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-record" onclick="Soft.setAlarmValue(event)">
+                                    <i class="iconfont icon-5"></i>设置报警值
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="oxygen" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="carbon" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="hydrogen" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="chart-container">
+                                    <div id="combustible" class="soft-chart vertical-spacing"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="water-level">
+                        <div class="row vertical-spacing">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-record" onclick="SoftWater.setDepth(event)">
+                                    <i class="iconfont icon-5"></i>监测点深度
+                                </button>
+                                <button type="button" class="btn btn-record" onclick="SoftWater.setAlarmValue(event)">
+                                    <i class="iconfont icon-5"></i>设置报警值
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row vertical-spacing">
+                            <div class="col-sm-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Posture-alarm">
+                        <div class="row vertical-spacing">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-record"  onclick="LevelCall()">
+                                    <i class="iconfont icon-5"></i>设置水平报警值
+                                </button>
+                                <button type="button" class="btn btn-record" onclick="VerticalCall()">
+                                    <i class="iconfont icon-5"></i>设置垂直报警值
+                                </button>
+                                <!--                                <button type="button" class="btn btn-record" onclick="SoftWater.setDepth(event)">-->
+                                <!--                                    <i class="iconfont icon-5"></i>监测点深度-->
+                                <!--                                </button>-->
+                                <!--                                <button type="button" class="btn btn-record" onclick="SoftWater.setAlarmValue(event)">-->
+                                <!--                                    <i class="iconfont icon-5"></i>设置报警值-->
+                                <!--                                </button>-->
+                            </div>
+                        </div>
+                        <div class="row vertical-spacing">
+                            <div class="col-sm-12">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!--rem-->
+<script type="text/javascript" src="../js/util/rem.js"></script>
+<!--jQuery-->
+<script src="../js/common/jquery.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/common/bootstrap.js"></script>
+<!-- FastClick -->
+<script src="../plugins/fastclick/fastclick.js"></script>
+<!-- SlimScroll -->
+<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!--highcharts-->
+<script src="../plugins/Highcharts-6.1.1/code/highcharts.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/common/app.js"></script>
+<!--layer-->
+<script src="../plugins/layer/layer.min.js"></script>
+<!-- date-range-picker -->
+<script src="../plugins/daterangepicker/moment.min.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- daterange picker -->
+<script src="../plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<!--jquery-colorpicker-->
+<script src="../plugins/jquery-bigcolorpicker/js/jquery.bigcolorpicker.js"></script>
+<!--echarts-->
+<script type="text/javascript" src="../plugins/echarts/echarts.min.js"></script>
+<!-- highcharts export -->
+<script src="../plugins/Highcharts-6.1.1/code/modules/exporting.js"></script>
+<!--datatables-->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- Feng -->
+<script src="../js/common/Feng.js"></script>
+<!--ajax-object-->
+<script src="../js/common/ajax-object.js"></script>
+<!--common-->
+<script src="../js/common/common.js"></script>
+<script src="../js/soft/soft.js"></script>
+<script src="../js/soft/soft-water.js"></script>
+<script id="add-environment-record" type="text/html">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" class="form-control datetime" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">PM2.5</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="PM2.5" type="number">
+                        <span class="input-group-addon">ug/m³</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">PM10</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="PM10" type="number">
+                        <span class="input-group-addon">ug/m³</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">噪声</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="noise" type="number">
+                        <span class="input-group-addon">dB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">温度</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="temperature" type="number">
+                        <span class="input-group-addon">℃</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">湿度</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="humidity" type="number">
+                        <span class="input-group-addon">%RH</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">风速</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="windSpeed" type="number">
+                        <span class="input-group-addon">m/s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">风向</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="windDirection" type="text">
+                        <span class="input-group-addon">方向</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">风力</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="windLevel" type="number">
+                        <span class="input-group-addon">级</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">检测人</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="testor" type="text">
+                        <span class="input-group-addon"><i class="fa fa-user" style="color: #aaaaaa;"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="Soft.recordEnvSave()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(Soft.layerIndex)">取消</button>
+    </div>
+</script>
+
+<script id="add-ditch-record" type="text/html">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" class="form-control datetime" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">氧气</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="oxygen" type="number">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">一氧化碳</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="carbon" type="number">
+                        <span class="input-group-addon">PPM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">硫化氢</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="hydrogen" type="number">
+                        <span class="input-group-addon">mg/m³</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">可燃气</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="combustible" type="number">
+                        <span class="input-group-addon">PPM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">检测人</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="testor" type="text">
+                        <span class="input-group-addon"><i class="fa fa-user" style="color: #aaaaaa;"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="Soft.recordDitchSave()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(Soft.layerIndex)">取消</button>
+    </div>
+</script>
+
+<script id="set-alarm-value" type="text/html">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-1 control-label">检测项</label>
+                <div class="col-sm-11">
+                    <select id="detect-select" class="form-control">
+                        <option value="null" disabled selected>请选择检测项</option>
+                        <option value="gas_7" id="dust">PM2.5</option>
+                        <option value="gas_6">PM10</option>
+                        <option value="gas_8">噪声</option>
+                        <option value="gas_9">温度</option>
+                        <option value="gas_10">湿度</option>
+                        <option value="gas_11">风速</option>
+                        <option value="gas_13">风力</option>
+                        <option value="gas_2">氧气</option>
+                        <option value="gas_3">一氧化碳</option>
+                        <option value="gas_4">硫化氢</option>
+                        <option value="gas_1">可燃气</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="threshold_container">
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4 text-center threshold-btn" data-name="max_val"
+                 onclick="Soft.addAlarmValue(event)">
+                <i class="fa fa-plus"></i>阈值上限
+            </div>
+            <div class="col-sm-4 text-center threshold-btn" data-name="min_val"
+                 onclick="Soft.addAlarmValue(event)">
+                <i class="fa fa-plus"></i>阈值下限
+            </div>
+            <div class="col-sm-4 text-center threshold-btn" data-name="identical_val"
+                 onclick="Soft.addAlarmValue(event)">
+                <i class="fa fa-plus"></i>阈值恒等
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="Soft.saveAlarmValue()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(Soft.layerIndex)">取消</button>
+    </div>
+</script>
+
+<script id="set-water-alarmValue" type="text/html">
+    <form class="form-horizontal" role="form">
+        <div id="waterLevel-threshold">
+        </div>
+        <div class="text-center" style="line-height: 50px;font-size: 20px;">
+            <a href="javascript:void (0)" onclick="SoftWater.addGroup(event)">
+                <i class="fa fa-plus" style="margin-right: 8px;"></i>添加一组
+            </a>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="SoftWater.saveThresholdValue()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(Soft.layerIndex)">取消</button>
+    </div>
+</script>
+
+<script id="set-water-depth" type="text/html">
+    <form class="form-horizontal" role="form" name="water-alarmValue-form">
+        <div class="form-group">
+            <label class="control-label">监测点深度</label>
+            <input type="number" name="depth" class="form-control" style="display: inline-block;width: 86.5%;margin-left: 20px;" />
+
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="SoftWater.saveDepth()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(Soft.layerIndex)">取消</button>
+    </div>
+</script>
+<script id="Vertical-Call" type="text/html">
+    <form class="form-horizontal" role="form">
+        <div id="Comes-with">
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="ContentStorage(event)">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(Soft.layerIndex)">取消</button>
+    </div>
+</script>
+
+<!--这是写水平和垂直的阈值上限-->
+<script>
+//要发送到后端的数据
+    var AlarmValue={
+        endtimestr: "",
+        id: null,
+        identical_val: "{}",
+        max_val: "",
+        min_val: "{}",
+        starttimestr: "",
+        type: ""
+    }
+    // 垂直数据 接口
+    function vertical() {
+        return $.ajax({
+            type: "get",
+            url: "/threshold/get",
+            data: {type: "vertical"},
+            dataType: "json"
+        });
+    }
+    //  水平数据  接口
+    function Levelcall() {
+        return $.ajax({
+            type: "get",
+            url: "/threshold/get",
+            data: {type: "level"},
+            dataType: "json"
+        });
+    }
+    //这是保存数据
+    function ContentStorage(e){
+        console.log(AlarmValue.type)
+        AlarmValue.max_val='{"'+$(e.target).parent().parent().find("input").eq(1).val()+'":"'+$(e.target).parent().parent().find("input").eq(2).val()+'"}'
+        var StartingEnding= $(e.target).parent().parent().find("input").eq(0).val()
+        StartingEnding=StartingEnding.split(" ~ ")
+        console.log(StartingEnding[0])
+        AlarmValue.starttimestr=StartingEnding[0]
+        AlarmValue.endtimestr=StartingEnding[1]
+        console.log(AlarmValue)
+
+        $.ajax({
+            type: "post",
+            url: "/threshold/saveOrUpdateLevel",
+            data: JSON.stringify(AlarmValue),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success:function(json){
+                layer.close(Soft.layerIndex)
+                console.log(json)
+            },
+            error:function (json) {
+                console.log(json)
+            }
+        });
+
+    }
+    //清空数据
+    function EmptyData(e) {
+        $(".form-control").val("")
+        $.ajax({
+            type: "get",
+            url: "/threshold/deleteThresholdLevel",
+            data: {id: e}
+        })
+    }
+
+    //这是垂直报警
+   function VerticalCall(){
+       console.log(123)
+       Soft.openLayer('Vertical-Call',"设置垂直报警值",function(){
+           vertical().then(function (json) {
+               if (json.code==200){
+                   AlarmValue.type="vertical"
+                   AlarmValue.id=json.result.id
+                   if (json.result.id==null){
+                       $("#Comes-with").append('<fieldset style="height: auto" data-groupId="" >' +
+                           '<div class="fieldset-content">' +
+                           '<div class="threshold-time form-group">' +
+                           '<div class="row">' +
+                           '<div class="col-sm-12">' +
+                           '<label class="control-label">时间段</label>' +
+                           '<input type="text" class="form-control datepicker" value=""readonly="readonly">' +
+                           '</div>' +
+                           '</div>' +
+                           '</div>' +
+                           '<div class="threshold-content">' +
+                           '<div class="form-group threshold-item" data-type="max_val"> ' +
+                           '<div class="row">' +
+                           '<div class="col-sm-8">' +
+                           ' <label class="control-label">阈值上限</label>' +
+                           ' <input type="number" class="form-control" value="" style="display: inline-block;width: 80%;margin-left: 20px;">' +
+                           '</div>' +
+                           '<div class="col-sm-3">' +
+                           ' <div class="input-group">' +
+                           '  <input class="form-control color-picker" type="text" value="" readonly="readonly" placeholder="选择颜色">' +
+                           '  <span class="input-group-addon" style="background-color:">&nbsp;&nbsp;</span>' +
+
+                           ' </div>' +
+                           '</div>' +
+                           '                <div class="col-sm-1 text-center" style="height: 34px;;line-height: 40px;">' +
+                           '                    <i class="fa fa-trash" onclick="EmptyData('+json.result.id+')" style="color: red;font-size: 16px;"></i>' +
+                           '                </div>' +
+                           '</div>' +
+                           '<div class="threshold-content">' +
+                           '</div>' +
+                           '</div>' +
+                           '</fieldset>')
+                       $(".datepicker").daterangepicker({
+                           autoUpdateInput: true,
+                           ranges: {
+                               '今天': [moment().format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                               '昨天': [moment().subtract(1, 'days').format("YYYY-MM-DD 00:00"), moment().subtract(1, 'days').format("YYYY-MM-DD 23:59")],
+                               '最近一周': [moment().subtract(6, 'days').format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                               '最近30天': [moment().subtract(29, 'days').format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                               '本月': [moment().startOf('month').format("YYYY-MM-DD 00:00"), moment().endOf('month').format("YYYY-MM-DD 23:59")],
+                               '上月': [moment().subtract(1, 'month').startOf('month').format("YYYY-MM-DD 00:00"), moment().subtract(1, 'month').endOf('month').format("YYYY-MM-DD 23:59")]
+                           },
+                           locale: {
+                               customRangeLabel: '自定义',
+                               format: 'YYYY-MM-DD HH:mm:ss',
+                               separator: ' ~ ',
+                               applyLabel: "确定",
+                               cancelLabel: "取消",
+                               resetLabel: "重置",
+                               daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+                               monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+                           },
+                           timePicker: true,
+                           timePicker24Hour: true,
+                           opens: 'right'
+                       })
+                       $(".color-picker").bigColorpicker(function (el,color) {
+                           el.value = color;
+                           $(el).next().css('background-color', color);
+                       },"L",3)
+                       $(".layui-layer-content").css({
+                           'height': 'auto',
+                           'max-height': '500px'
+                       });
+                   }else {
+                   console.log(AlarmValue.id)
+               text=JSON.parse(json.result.max_val)
+               value=Object.keys(text)
+               console.log(value)
+               $("#Comes-with").append('<fieldset style="height: auto" data-groupId="'+json.result.id+'" >' +
+                   '<div class="fieldset-content">' +
+                   '<div class="threshold-time form-group">' +
+                   '<div class="row">' +
+                   '<div class="col-sm-12">' +
+                   '<label class="control-label">时间段</label>' +
+                   '<input type="text" class="form-control datepicker" value="'+json.result.starttime+' ~ '+json.result.endtime+'" readonly="readonly">' +
+                   '</div>' +
+                   '</div>' +
+                   '</div>' +
+                   '<div class="threshold-content">' +
+                   '<div class="form-group threshold-item" data-type="max_val"> ' +
+                   '<div class="row">' +
+                   '<div class="col-sm-8">' +
+                   ' <label class="control-label">阈值上限</label>' +
+                   ' <input type="number" class="form-control" value="'+value[0]+'" style="display: inline-block;width: 80%;margin-left: 20px;">' +
+                   '</div>' +
+                   '<div class="col-sm-3">' +
+                   ' <div class="input-group">' +
+                   '  <input class="form-control color-picker" type="text" value="'+text[value]+'" readonly="readonly" placeholder="选择颜色">' +
+                   '  <span class="input-group-addon" style="background-color:'+text[value]+'">&nbsp;&nbsp;</span>' +
+                   ' </div>' +
+                   '</div>' +
+                   '                <div class="col-sm-1 text-center" style="height: 34px;;line-height: 40px;">' +
+                   '                    <i class="fa fa-trash" onclick="EmptyData('+json.result.id+')" style="color: red;font-size: 16px;"></i>' +
+                   '                </div>' +
+                   '</div>' +
+                   '<div class="threshold-content">' +
+                   '</div>' +
+                   '</div>' +
+                   '</fieldset>')
+               $(".datepicker").daterangepicker({
+                   autoUpdateInput: true,
+                   ranges: {
+                       '今天': [moment().format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                       '昨天': [moment().subtract(1, 'days').format("YYYY-MM-DD 00:00"), moment().subtract(1, 'days').format("YYYY-MM-DD 23:59")],
+                       '最近一周': [moment().subtract(6, 'days').format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                       '最近30天': [moment().subtract(29, 'days').format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                       '本月': [moment().startOf('month').format("YYYY-MM-DD 00:00"), moment().endOf('month').format("YYYY-MM-DD 23:59")],
+                       '上月': [moment().subtract(1, 'month').startOf('month').format("YYYY-MM-DD 00:00"), moment().subtract(1, 'month').endOf('month').format("YYYY-MM-DD 23:59")]
+                   },
+                   locale: {
+                       customRangeLabel: '自定义',
+                       format: 'YYYY-MM-DD HH:mm:ss',
+                       separator: ' ~ ',
+                       applyLabel: "确定",
+                       cancelLabel: "取消",
+                       resetLabel: "重置",
+                       daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+                       monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+                   },
+                   timePicker: true,
+                   timePicker24Hour: true,
+                   opens: 'right'
+               })
+               $(".color-picker").bigColorpicker(function (el,color) {
+                   el.value = color;
+                   $(el).next().css('background-color', color);
+               },"L",3)
+               $(".layui-layer-content").css({
+                   'height': 'auto',
+                   'max-height': '500px'
+               });}
+              
+           }})
+        })
+   }
+    //这是水平报警
+    function LevelCall(){
+        console.log(123)
+        Soft.openLayer('Vertical-Call',"设置水平报警值",function(){
+            Levelcall().then(function (json) {
+                if (json.code==200) {
+                console.log(json)
+                    AlarmValue.type="level"
+                    AlarmValue.id=json.result.id
+                    if (json.result.id==null){
+                        console.log(123)
+                        $("#Comes-with").append('<fieldset style="height: auto" data-groupId="" >' +
+                            '<div class="fieldset-content">' +
+                            '<div class="threshold-time form-group">' +
+                            '<div class="row">' +
+                            '<div class="col-sm-12">' +
+                            '<label class="control-label">时间段</label>' +
+                            '<input type="text" class="form-control datepicker" value=""readonly="readonly">' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="threshold-content">' +
+                            '<div class="form-group threshold-item" data-type="max_val"> ' +
+                            '<div class="row">' +
+                            '<div class="col-sm-8">' +
+                            ' <label class="control-label">阈值上限</label>' +
+                            ' <input type="number" class="form-control" value="" style="display: inline-block;width: 80%;margin-left: 20px;">' +
+                            '</div>' +
+                            '<div class="col-sm-3">' +
+                            ' <div class="input-group">' +
+                            '  <input class="form-control color-picker" type="text" value="" readonly="readonly" placeholder="选择颜色">' +
+                            '  <span class="input-group-addon" style="background-color:">&nbsp;&nbsp;</span>' +
+                            ' </div>' +
+                            '</div>' +
+                            '                <div class="col-sm-1 text-center" style="height: 34px;;line-height: 40px;">' +
+                            '                    <i class="fa fa-trash" onclick="EmptyData('+json.result.id+')" style="color: red;font-size: 16px;"></i>' +
+                            '                </div>' +
+                            '</div>' +
+                            '<div class="threshold-content">' +
+                            '</div>' +
+                            '</div>' +
+                            '</fieldset>')
+                        $(".datepicker").daterangepicker({
+                            autoUpdateInput: true,
+                            ranges: {
+                                '今天': [moment().format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                                '昨天': [moment().subtract(1, 'days').format("YYYY-MM-DD 00:00"), moment().subtract(1, 'days').format("YYYY-MM-DD 23:59")],
+                                '最近一周': [moment().subtract(6, 'days').format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                                '最近30天': [moment().subtract(29, 'days').format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                                '本月': [moment().startOf('month').format("YYYY-MM-DD 00:00"), moment().endOf('month').format("YYYY-MM-DD 23:59")],
+                                '上月': [moment().subtract(1, 'month').startOf('month').format("YYYY-MM-DD 00:00"), moment().subtract(1, 'month').endOf('month').format("YYYY-MM-DD 23:59")]
+                            },
+                            locale: {
+                                customRangeLabel: '自定义',
+                                format: 'YYYY-MM-DD HH:mm:ss',
+                                separator: ' ~ ',
+                                applyLabel: "确定",
+                                cancelLabel: "取消",
+                                resetLabel: "重置",
+                                daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+                                monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+                            },
+                            timePicker: true,
+                            timePicker24Hour: true,
+                            opens: 'right'
+                        })
+                        $(".color-picker").bigColorpicker(function (el,color) {
+                            el.value = color;
+                            $(el).next().css('background-color', color);
+                        },"L",3)
+                        $(".layui-layer-content").css({
+                            'height': 'auto',
+                            'max-height': '500px'
+                        });
+                    }
+                    else {
+                        text=JSON.parse(json.result.max_val)
+                value=Object.keys(text)
+                console.log(value)
+                $("#Comes-with").append('<fieldset style="height: auto" data-groupId="'+json.result.id+'" >' +
+                    '<div class="fieldset-content">' +
+                    '<div class="threshold-time form-group">' +
+                    '<div class="row">' +
+                    '<div class="col-sm-12">' +
+                    '<label class="control-label">时间段</label>' +
+                    '<input type="text" class="form-control datepicker" value="'+json.result.starttime+' ~ '+json.result.endtime+'" readonly="readonly">' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="threshold-content">' +
+                    '<div class="form-group threshold-item" data-type="max_val"> ' +
+                    '<div class="row">' +
+                    '<div class="col-sm-8">' +
+                    ' <label class="control-label">阈值上限</label>' +
+                    ' <input type="number" class="form-control" value="'+value[0]+'" style="display: inline-block;width: 80%;margin-left: 20px;">' +
+                    '</div>' +
+                    '<div class="col-sm-3">' +
+                    ' <div class="input-group">' +
+                    '  <input class="form-control color-picker" type="text" value="'+text[value]+'" readonly="readonly" placeholder="选择颜色">' +
+                    '  <span class="input-group-addon" style="background-color:'+text[value]+'">&nbsp;&nbsp;</span>' +
+                    ' </div>' +
+                    '</div>' +
+                    '                <div class="col-sm-1 text-center" style="height: 34px;;line-height: 40px;">' +
+                    '                    <i class="fa fa-trash" onclick="EmptyData('+json.result.id+')" style="color: red;font-size: 16px;"></i>' +
+                    '                </div>' +
+                    '</div>' +
+                    '<div class="threshold-content">' +
+                    '</div>' +
+                    '</div>' +
+                    '</fieldset>')
+                $(".datepicker").daterangepicker({
+                    autoUpdateInput: true,
+                    ranges: {
+                        '今天': [moment().format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                        '昨天': [moment().subtract(1, 'days').format("YYYY-MM-DD 00:00"), moment().subtract(1, 'days').format("YYYY-MM-DD 23:59")],
+                        '最近一周': [moment().subtract(6, 'days').format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                        '最近30天': [moment().subtract(29, 'days').format("YYYY-MM-DD 00:00"), moment().format("YYYY-MM-DD 23:59")],
+                        '本月': [moment().startOf('month').format("YYYY-MM-DD 00:00"), moment().endOf('month').format("YYYY-MM-DD 23:59")],
+                        '上月': [moment().subtract(1, 'month').startOf('month').format("YYYY-MM-DD 00:00"), moment().subtract(1, 'month').endOf('month').format("YYYY-MM-DD 23:59")]
+                    },
+                    locale: {
+                        customRangeLabel: '自定义',
+                        format: 'YYYY-MM-DD HH:mm:ss',
+                        separator: ' ~ ',
+                        applyLabel: "确定",
+                        cancelLabel: "取消",
+                        resetLabel: "重置",
+                        daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+                        monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+                    },
+                    timePicker: true,
+                    timePicker24Hour: true,
+                    opens: 'right'
+                })
+                $(".color-picker").bigColorpicker(function (el,color) {
+                    el.value = color;
+                    $(el).next().css('background-color', color);
+                },"L",3)
+                $(".layui-layer-content").css({
+                    'height': 'auto',
+                    'max-height': '500px'
+                });
+                    }
+            }
+            })
+        })
+    }
+</script>
+</body>
+</html>

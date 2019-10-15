@@ -1,0 +1,22 @@
+.ztree li>a span.node_name{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #555555;
+}
+.ztree li a{
+    height: 30px;
+}
+.ztree li a.curSelectedNode{
+    padding: 0;
+    border: none;
+    background: none;
+    opacity: inherit;
+    height: 30px;
+}
+.ztree li a.curSelectedNode .node_name{
+    font-weight: bold;
+    color: #1493E4;
+}

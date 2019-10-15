@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>杭州地铁SG8-2建筑施工大脑
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../css/common/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--ztree-->
+    <link href="../plugins/ztree/css/zTreeStyle.css" rel="stylesheet">
+    <link href="../plugins/ztree/css/custom.css" rel="stylesheet">
+    <!--datatables-->
+    <link href="../plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <!--[endif]-->
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/attend/attend.css" rel="stylesheet">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition fixed">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-menu">
+                <a href="./index.html" class="btn btn-menu"><i class="iconfont icon-icon-test"></i>首页</a>
+                <a href="./video.html" class="btn btn-menu"><i class="iconfont icon-bofang1"></i>实时视频</a>
+                <a href="./staff.html" class="btn btn-menu"><i class="iconfont icon-renyuanxiaozu"></i>人员管理</a>
+                <a href="javascript:void (0)" class="btn btn-menu btn-active"><i class="iconfont icon-rili"></i>考勤管理</a>
+                <a href="./equipment.html" class="btn btn-menu"><i class="fa fa-file-text-o"  style="margin-right: 5px;"></i>设备管理</a>
+                <a href="./alarm.html" class="btn btn-menu"><i class="iconfont icon-yigaojing"></i>报警记录</a>
+                <a href="./soft.html" class="btn btn-menu"><i class="iconfont icon-anquan"></i>环境安全</a>
+                <a href="./vehicle.html" class="btn btn-menu"><i class="iconfont icon-cheliangguanli"></i>车辆管理</a>
+                <a href="./dataEntery.html" class="btn btn-menu"><i class="iconfont icon-5"></i>数据录入</a>
+                <a href="./measure.html" class="btn btn-menu"><i class="iconfont icon-cehuichengguoguanli"></i>实时监测</a>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="sign-out"><i class="fa fa-sign-out">退出</i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Content Header (Page header) -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    <i class="iconfont icon-bumenguanli"></i>
+                                    组织结构
+                                </h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group search">
+                                    <input type="text" id="searcher" class="form-control" placeholder="输入部门名称">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                                <ul id="dept-tree" class="ztree"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-8 col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title dept-name">请选择部门</h3>
+                            </div>
+                            <div class="box-body">
+                                <table id="staff_table" class="table table-bordered table-hover" style="width:100%">
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!--rem-->
+<script type="text/javascript" src="../js/util/rem.js"></script>
+<!--jQuery-->
+<script src="../js/common/jquery.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/common/bootstrap.js"></script>
+<!-- FastClick -->
+<script src="../plugins/fastclick/fastclick.js"></script>
+<!-- SlimScroll -->
+<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/common/app.js"></script>
+<!--ztree-->
+<script src="../plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<script src="../plugins/ztree/js/jquery.ztree.exhide.js"></script>
+<!--ztree Object-->
+<script src="../js/common/ztree-object.js"></script>
+<!--layer-->
+<script src="../plugins/layer/layer.min.js"></script>
+<!--datatables-->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- Feng -->
+<script src="../js/common/Feng.js"></script>
+<!--common-->
+<script src="../js/common/common.js"></script>
+<script src="../js/attend/attendManage.js"></script>
+</body>
+</html>

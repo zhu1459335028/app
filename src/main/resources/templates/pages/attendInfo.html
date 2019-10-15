@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>杭州地铁8号线AI智能管理平台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../css/common/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--ztree-->
+    <link href="../plugins/ztree/css/zTreeStyle.css" rel="stylesheet">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+    <!--datatables-->
+    <link href="../plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <!--[endif]-->
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/attend/attend.css" rel="stylesheet">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition fixed">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-menu">
+                <a href="./index.html" class="btn btn-menu"><i class="iconfont icon-icon-test"></i>首页</a>
+                <a href="./video.html" class="btn btn-menu"><i class="iconfont icon-bofang1"></i>实时视频</a>
+                <a href="./staff.html" class="btn btn-menu"><i class="iconfont icon-renyuanxiaozu"></i>人员管理</a>
+                <a href="./attendManage.html" class="btn btn-menu"><i class="iconfont icon-renyuanxiaozu"></i>考勤管理</a>
+                <a href="./equipment.html" class="btn btn-menu"><i class="fa fa-file-text-o"  style="margin-right: 5px;"></i>设备管理</a>
+                <a href="./alarm.html" class="btn btn-menu"><i class="iconfont icon-yigaojing"></i>报警记录</a>
+                <a href="./soft.html" class="btn btn-menu"><i class="iconfont icon-anquan"></i>环境安全</a>
+                <a href="./vehicle.html" class="btn btn-menu"><i class="iconfont icon-cheliangguanli"></i>车辆管理</a>
+                <a href="./dataEntery.html" class="btn btn-menu"><i class="iconfont icon-5"></i>数据录入</a>
+                <a href="./measure.html" class="btn btn-menu"><i class="iconfont icon-cehuichengguoguanli"></i>实时监测</a>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="sign-out"><i class="fa fa-sign-out">退出</i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Content Header (Page header) -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box box-widget widget-user">
+                            <!-- Add the bg color to the header using any of the bg-* classes -->
+                            <div class="widget-user-header bg-blue-active">
+                                <h4 class="widget-user-username staff-name">-</h4>
+                                <h5 class="widget-user-desc staff-post">-</h5>
+                                <div class="widget-user-image">
+                                    <img class="img-circle staff-pic" src="../image/image/user.jpg" alt="用户头像">
+                                </div>
+                            </div>
+
+                            <div class="box-footer">
+                                <h4>人员信息</h4>
+                                <div class="staff-info">
+                                    <div class="staff-info-row">
+                                        <p>岗位</p>
+                                        <p class="staff-post"></p>
+                                    </div>
+                                    <div class="staff-info-row">
+                                        <p>部门</p>
+                                        <p class="staff-dept"></p>
+                                    </div>
+                                    <div class="staff-info-row">
+                                        <p>电话</p>
+                                        <p class="staff-phone"></p>
+                                    </div>
+                                    <div class="staff-info-row">
+                                        <p>累计在岗时长</p>
+                                        <p class="staff-duration"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-sm-8 col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title dept-name">在岗记录</h3>
+                            </div>
+                            <div class="box-body" style="position: relative;">
+                                <div class="input-group" style="position: absolute;width: 25%;right: 10px;">
+                                    <input type="text" id="datepicker-filter" class="form-control" placeholder="选择日期">
+                                    <div class="input-group-addon" style="border-bottom-right-radius: 4px;border-top-right-radius: 4px;">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                                <table id="task_table" class="table table-bordered table-hover" style="width:100%;">
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!--jQuery-->
+<script src="../js/common/jquery.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/common/bootstrap.js"></script>
+<!-- FastClick -->
+<script src="../plugins/fastclick/fastclick.js"></script>
+<!-- SlimScroll -->
+<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/common/app.js"></script>
+<!--ztree-->
+<script src="../plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<script src="../plugins/ztree/js/jquery.ztree.exhide.js"></script>
+<!--ztree Object-->
+<script src="../js/common/ztree-object.js"></script>
+<!--layer-->
+<script src="../plugins/layer/layer.min.js"></script>
+<!-- date-range-picker -->
+<script src="../plugins/daterangepicker/moment.min.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<!--datatables-->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- Feng -->
+<script src="../js/common/Feng.js"></script>
+<!--common-->
+<script src="../js/common/common.js"></script>
+<script src="../js/attend/attendInfo.js"></script>
+<!--rem-->
+<script type="text/javascript" src="../js/util/rem.js"></script>
+</body>
+</html>

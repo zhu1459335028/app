@@ -1,0 +1,127 @@
+.bg{
+    position: relative;
+    background: url("../../image/image/login.jpg") 100% 100% no-repeat;
+    min-width: 1000px;
+    min-height: 700px;
+    overflow: auto;
+}
+.top{
+    width: 100%;
+    height: 120px;
+    padding: 25px 50px;
+    border-bottom: 1px solid #888888;
+}
+.platform-name{
+    color: white;
+}
+.platform-time{
+    width: 220px;
+    color: white;
+}
+.platform-date{
+    margin-top: 20px;
+}
+.platform-date>p{
+    margin: 0;
+}
+.lg-box{
+    position: absolute;
+    width: 500px;
+    height: 400px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.lg-form{
+    width: 100%;
+    height: 60%;
+    background-color:rgba(255,255,255,0.5);
+    border-radius: 8px;
+    padding: 0 20px;
+}
+.lg-form>form{
+    width: 100%;
+    height: 100%;
+}
+.form-group{
+    width: 100%;
+    height: 33.3333%;
+    margin: 0;
+}
+.form-group:not(:last-child){
+    border-bottom: 1px solid #cccccc;
+}
+.form-group input{
+    box-sizing: border-box;
+    text-align:left;
+    font-size:1.2em;
+    border-radius:4px;
+    color:#333333;
+    display:block;
+    outline:0;
+    padding:0 1em;
+    text-decoration:none;
+    float: right;
+    height: 50px;
+    width: 100%;
+    border: none;
+    background: none;
+    margin-top: 14px;
+}
+.form-group input:focus{
+    border: none !important;
+}
+.form-group input::-webkit-input-placeholder{
+    color: #555555;
+}
+.form-group input::-moz-placeholder{
+    color: #555555;
+}
+.form-group input:-ms-input-placeholder {
+    color: #555555;
+}
+.icon-ai31, .icon-yonghu{
+    margin-top: 8px;
+    font-size: 50px;
+    color: #555590;
+    cursor: default;
+}
+.icon-guanbi{
+    margin-top: 11px;
+    font-size: 40px;
+    padding-left: 5px;
+    color: #555590;
+    cursor: default;
+}
+.lg-footer{
+    width: 100%;
+    margin-top: 20px;
+}
+.lg-btn{
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1965BD;
+}
+.btn-primary:hover,.btn-primary:active{
+    /*border: none !important;*/
+    /*border-radius: 8px !important;*/
+    background-color: #14549A;
+}
+.form-control-feedback{
+    top: 25px;
+}
+.help-block{
+    display: none;
+    top: 55px;
+    left: 33px;
+    position: absolute;
+}
+.login-error{
+    top: 55px;
+    left: 100px;
+    position: absolute;
+    color: red;
+}

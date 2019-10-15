@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>杭州地铁SG8-2建筑施工大脑
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../css/common/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--ztree-->
+    <link href="../plugins/ztree/css/zTreeStyle.css" rel="stylesheet">
+    <link href="../plugins/ztree/css/custom.css" rel="stylesheet">
+    <!--datatables-->
+    <link href="../plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+<!--    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="../plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <!--[if lt IE 9]-->
+    <script src="../js/common/respond.min.js"></script>
+    <!--[endif]-->
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/staff/staff.css" rel="stylesheet">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+
+<body class="hold-transition fixed">
+    <div class="wrapper">
+        <header class="main-header">
+            <nav class="navbar navbar-static-top">
+                <div class="navbar-menu">
+                    <a href="./index.html" class="btn btn-menu"><i class="iconfont icon-icon-test"></i>首页</a>
+                    <a href="./video.html" class="btn btn-menu"><i class="iconfont icon-bofang1"></i>实时视频</a>
+                    <a href="javascript:void (0)" class="btn btn-menu btn-active"><i class="iconfont icon-renyuanxiaozu"></i>人员管理</a>
+                    <a href="./attendManage.html" class="btn btn-menu"><i class="iconfont icon-rili"></i>考勤管理</a>
+                    <a href="./equipment.html" class="btn btn-menu"><i class="fa fa-file-text-o"  style="margin-right: 5px;"></i>设备管理</a>
+                    <a href="./alarm.html" class="btn btn-menu"><i class="iconfont icon-yigaojing"></i>报警记录</a>
+                    <a href="./soft.html" class="btn btn-menu"><i class="iconfont icon-anquan"></i>环境安全</a>
+                    <a href="./vehicle.html" class="btn btn-menu"><i class="iconfont icon-cheliangguanli"></i>车辆管理</a>
+                    <a href="./dataEntery.html" class="btn btn-menu"><i class="iconfont icon-5"></i>数据录入</a>
+                    <a href="./measure.html" class="btn btn-menu"><i
+                            class="iconfont icon-cehuichengguoguanli"></i>实时监测</a>
+                </div>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#" class="sign-out"><i class="fa fa-sign-out">退出</i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <!-- Content Header (Page header) -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">
+                                        <i class="iconfont icon-bumenguanli"></i>
+                                        组织结构
+                                    </h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group search">
+                                        <input type="text" id="searcher" class="form-control" placeholder="输入部门名称">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                    <ul id="dept-tree" class="ztree"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9 col-sm-8 col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title dept-name">请选择部门</h3>
+                                </div>
+                                <div class="box-body">
+                                    <table id="staff_table" class="table table-bordered table-hover" style="width:100%">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!--人员详情 创建个div-->
+
+    <div class="Personnel-details">
+        <div class="Personnel-details-center">
+            <p class="Personnel-details-top">人员详情<button onclick="CloseDetails()">×</button></p>
+            <div class="Personnel-details-details-left">
+                <div class="Personnel-details-left-top">
+                    <p class="details-name" style="font-size: 16px"></p>
+                    <p class="job-title-p" style="font-size: 14px"></p>
+                    <div class="img-touxiang-div">
+                        <img class="img-touxiang" src="">
+                    </div>
+                </div>
+                <div class="personal-information">
+                    <p style="font-size:18px; font-weight: 700;">人员信息</p>
+                    <div><span>工种</span><span class="job-title-span"></span></div>
+                    <div><span>单位</span><span class="work-unit"></span></div>
+                    <div><span>电话</span><span class="job-phone"></span></div>
+                    <div><span>家庭住址</span><span class="family-address"></span></div>
+                </div>
+            </div>
+            <div class="Personnel-details-details-right">
+                <table class="safety-education" border="1">
+                    <tr class="safety-education-tr1">
+                        <td>安全教育</td>
+                        <td>教育内容</td>
+                        <td>教育日期及学时</td>
+                        <td>教育人姓名及职位</td>
+                        <td style="width: 100px;">详情</td>
+                    </tr>
+                    <tr class="corporation" style="height: 154px;">
+                        <td>公司级</td>
+                        <td class="corporationcontent contentname">
+                            1、国务院和建设部制定的安全生产方针、政策和规程、规范；<br>
+                            2、安全生产、劳动保护的意义和任务；<br>
+                            3、安全生产六大纪律、十项安全技术措施、安全生产“十不准”和其他的规章制度；<br>
+                            4、分公司安全生产形势和任务以及主要类别事故的预防，如高处坠落、触电、物体打击、机具伤害等；<br>
+                            5、公司以往发生的重大伤亡事故分析及应吸取的教训；<br>
+                            6、事故发生后，如何抢救伤员、排险、保护现场和及时报告；<br>
+                            7、增强个人安全保护意识，认真开展我不伤害自己、不伤害别人、不被他人伤害的安全生产活动。<br>
+                        </td>
+                        <td class="corporationperiod"></td>
+                        <td class="corporationname"></td>
+                        <td class="addImagesls" rowspan="3">
+
+                            <div class="addImages">
+                                <input type="file" class="file" name="mFile" id="fileInput" accept="image/png, image/jpeg, image/gif, image/jpg"/>
+<!--                                -->
+                                <div class="text-detail">
+                                    <span>+</span>
+                                    <p>点击上传图片</p>
+                                </div>
+                                <div class="examines" style="position: absolute;left:0;top:0;z-index: 1000;width: 100%;height: 100%; display: none;"></div>
+                                <i class="fa fa-eye examine"></i>
+                                <i class="fa fa-trash cancel deleteimgs"></i>
+                            </div>
+                            <div class="addImages1">
+                                <input type="file" accept=".doc" class="file1" name="mFile" id="fileInput1"/>
+                                <div class="text-detail1">
+                                    <span>+</span>
+                                    <p style="margin:0px 0px;">点击上传文件</p>
+                                    <p>只支持doc格式</p>
+                                </div>
+                                <div class="examines1" style="position: absolute;left:0;top:0;z-index: 1000;width: 100%;height: 100%; display: none;"></div>
+                                <i class="fa fa-trash cancel1 deleteimgs1"></i>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr class="item-corpor" style="height: 154px;">
+                        <td>项目部级</td>
+                        <td class="itemcontent contentname">
+                            1、建筑工程施工特点及安全生产基本知识；<br>
+                            2、本单位安全生产规章、制度、纪律和安全注意事项；<br>
+                            3、各工种的安全技术操作规程、规定、文明生产要求；<br>
+                            4、机械设备、电气安全及高处作业等安全基本知识和防护措施；<br>
+                            5、防火、防毒和防爆安全知识及预防措施；<br>
+                            6、防护用具、用品的正确使用规定；<br>
+                            7、爱护施工现场各类安全防护设施、设备、器具，严禁擅自拆卸、损坏及有关奖罚规定。<br>
+                        </td>
+                        <td class="itemperiod"></td>
+                        <td class="itemname"></td>
+                    </tr>
+                    <tr class="classesn" style="height: 154px;">
+                        <td>班组级</td>
+                        <td class="classescontent contentname">
+                            1、班组安全作业活动制度及纪律；<br>
+                            2、本班组的作业特点及安全操作规程和作业危险区域、部位及其安全防护要求、措施；<br>
+                            3、爱护和正确使用安全防护装置（设施）及个人劳保用品；<br>
+                            4、本岗位易发生事故的不安全因素及其防护对策；<br>
+                            5、本岗位的作业环境及使用的机械设备、工具的安全要求。<br>
+                        </td>
+                        <td class="classesperiod"></td>
+                        <td class="classesname"></td>
+                    </tr>
+                    <tr class="remarks">
+                        <td colspan="5" style="text-align: left; padding-left: 15px; box-sizing: border-box;">
+                        </td>
+                    </tr>
+                </table>
+                <table class="exam-content" border="1">
+                    <tr>
+                        <td>成绩</td>
+                        <td>合格与否</td>
+                        <td>考试说明</td>
+                    </tr>
+                    <tr>
+                       <td class="achievement"></td>
+                       <td class="qualified"></td>
+                       <td class="explains"></td>
+                    </tr>
+                    <tr>
+                        <td class="constructionname-supervisorname" colspan="3">
+                                <div  class="constructionname" style=" border-right: 1px solid #f0f0f0"></div>
+                                <div  class="supervisorname"></div>
+                        </td>
+
+                    </tr>
+                </table>
+                <div class="Save-cancel"> <button onclick="SaveData()" style="background:rgb(56,139,255);">保存</button><button style="background: #dd4b39;" onclick="CloseDetails()">取消</button></div>
+            </div>
+        </div>
+    </div>
+    <!--rem-->
+    <script src="../js/staff/html5shiv.min.js"></script>
+    <script type="text/javascript" src="../js/util/rem.js"></script>
+    <!--jQuery-->
+    <script src="../js/common/jquery.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="../js/common/bootstrap.js"></script>
+    <!-- FastClick -->
+    <script src="../plugins/fastclick/fastclick.js"></script>
+    <!-- SlimScroll -->
+    <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../js/common/app.js"></script>
+    <!--ztree-->
+    <script src="../plugins/ztree/js/jquery.ztree.all.min.js"></script>
+    <script src="../plugins/ztree/js/jquery.ztree.exhide.js"></script>
+    <!--ztree Object-->
+    <script src="../js/common/ztree-object.js"></script>
+    <!--file-upload-->
+    <script type="text/javascript" src="../plugins/file-upload/upload.js"></script>
+    <script type="text/javascript" src="../js/util/image-upload.js"></script>
+    <!--layer-->
+    <script src="../plugins/layer/layer.min.js"></script>
+    <script src="../js/staff/layui.js"></script>
+    <!--datatables-->
+    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="../plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <!-- Feng -->
+    <script src="../js/common/Feng.js"></script>
+    <!--common-->
+    <script src="../js/common/common.js"></script>
+    <script src="../js/staff/staff.js"></script>
+    <script id="teb-imgs" type="text/html">
+    <form>
+        <img class="img-tebs" src="">
+    </form>
+</script>
+
+    <script id="teb-imgs1" type="text/html">
+        <form>
+            <iframe class="img-tebs1" src=""></iframe>
+        </form>
+    </script>
+
+    <script id="upload-pic" type="text/html">
+    <form class="form-horizontal" name="idcard-pic" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">身份证正面照</label>
+                <div class="col-sm-9">
+                    <div id="face-image">
+                        <div>
+                            <input type="file" name="ime-images" multiple="multiple" style="display: none;">
+                            <img src="../image/upload.png" class="img-responsive" alt="身份证正面照" title="">
+                            <i class="fa fa-trash cancel"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">身份证反面照</label>
+                <div class="col-sm-9">
+                    <div id="con-image">
+                        <div>
+                            <input type="file" name="ime-images" multiple="multiple" style="display: none;">
+                            <img src="../image/upload.png" class="img-responsive" alt="身份证反面照" title="">
+                            <i class="fa fa-trash cancel"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="StaffMager.savePersonInfo()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(StaffMager.layerIndex)">取消</button>
+    </div>
+</script>
+
+</body>
+
+</html>

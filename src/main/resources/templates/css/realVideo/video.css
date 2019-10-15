@@ -1,0 +1,69 @@
+.device-container{
+    padding: 10px;
+}
+.search{
+    position: relative;
+    padding: 10px;
+    margin-bottom: 0;
+}
+.search>input{
+    font-size: 12px;
+    height: 28px;
+    border-radius: 1.2em;
+}
+.fa-search{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    font-size: 14px;
+    color: #d2d6de;
+    cursor: default;
+    transform: translate(0,-50%);
+}
+.fa-search:active{
+    font-size: 16px;
+    color: #1493E4;
+}
+.ptz{
+    /*position: relative;*/
+    /*bottom: 10px;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%,0);*/
+    /*padding: 20px;*/
+    /*border: 1px solid #d2d6de;*/
+    margin-bottom: 20px;
+}
+.ptz img{
+    width: 40px;
+}
+.oper-control{
+    height: 35px;
+    width: 100%;
+    background-color: #292D3C;
+    padding: 0 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.ava-screen{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.ava-screen img{
+    width: 18px;
+    cursor: pointer;
+}
+.ava-screen img:not(:last-child){
+    margin-right: 10px;
+}
+.icon-tingzhi{
+    font-size: 28px;
+    color: red;
+    cursor: pointer;
+}
+.icon-tingzhi:active{
+    color: rgb(180,1,5);
+}

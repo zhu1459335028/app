@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>欢迎登录</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!--bootstrap-validate-->
+    <link rel="stylesheet" href="../plugins/bootstrap-Validate/css/bootstrapValidator.min.css">
+    <!--login-->
+    <link rel="stylesheet" href="../css/login/login.css">
+</head>
+<body class="bg">
+    <div class="top">
+        <div class="pull-left">
+            <h2 class="platform-name">杭州地铁实时监控平台</h2>
+        </div>
+        <div class="pull-right">
+            <div class="platform-time">
+                <div class="pull-left">
+                    <h1 class="time">15:00</h1>
+                </div>
+                <div class="pull-right">
+                    <div class="platform-date">
+                        <p class="week">周三</p>
+                        <p class="date">2018/9/19</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lg-box">
+        <div class="lg-form">
+            <form role="form" id="loginForm">
+                <div class="form-group text-center">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2">
+                            <i class="iconfont icon-ai31 pull-left"></i>
+                        </div>
+                        <div class="col-sm-10 col-md-10">
+                            <input class="form-control" type="text" name="monitorName" placeholder="请输入运营中心名称" style="margin-top: 18px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2">
+                            <i class="iconfont icon-yonghu pull-left"></i>
+                        </div>
+                        <div class="col-sm-10 col-md-10">
+                            <input class="form-control" type="text" name="userName" placeholder="请输入账号" style="margin-top: 18px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2">
+                            <i class="iconfont icon-guanbi pull-left"></i>
+                        </div>
+                        <div class="col-sm-10 col-md-10">
+                            <input class="form-control" type="password" name="passWord" placeholder="请输入密码">
+                            <small class="login-error"></small>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="lg-footer">
+            <button type="button" id="login" class="btn btn-primary lg-btn">登&nbsp;&nbsp;&nbsp;录</button>
+        </div>
+    </div>
+</body>
+<!--jQuery-->
+<script src="../js/common/jquery.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/common/bootstrap.js"></script>
+<!--bootstrap-validate-->
+<script src="../plugins/bootstrap-Validate/js/bootstrapValidator.min.js"></script>
+<script src="../plugins/bootstrap-Validate/js/zh_CN.min.js"></script>
+<!--common-->
+<script src="../js/common/common.js"></script>
+<script src="../js/login/login.js"></script>
+</html>

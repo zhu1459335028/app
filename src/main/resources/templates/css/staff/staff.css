@@ -1,0 +1,388 @@
+.search {
+    position: relative;
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+.search>input {
+    font-size: 12px;
+    height: 28px;
+    border-radius: 12px;
+}
+
+.fa-search {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    font-size: 14px;
+    color: #d2d6de;
+    cursor: default;
+    transform: translate(0, -50%);
+}
+
+.fa-search:active {
+    font-size: 16px;
+    color: #1493E4;
+}
+
+#face-image,
+#con-image {
+    position: relative;
+    width: 200px;
+    height: auto;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#face-image>div,
+#con-image>div {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+#face-image>div>.fa-trash,
+#con-image>div>.fa-trash {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 20px;
+    color: red;
+    display: none;
+}
+
+.Personnel-details {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+}
+
+.Personnel-details-center {
+    margin: 40px auto;
+    width: 1400px;
+    height: 850px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .3);
+}
+
+.Personnel-details-top {
+    width: 100%;
+    height: 40px;
+    background: #F8F8F8;
+    border-bottom: 1px solid #F0F0F0;
+    border-radius: 6px;
+    line-height: 40px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.Personnel-details-top>button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    outline: none;
+    float: right;
+}
+
+.Personnel-details-details-left {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+.Personnel-details-left-top {
+    width: 300px;
+    height: 300px;
+    background: #272A42;
+    color: #A6A7B1;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    left: 0;
+    top: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.Personnel-details-left-top>p {
+    margin: 0;
+}
+
+.img-touxiang-div {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    border: 3px solid #FFFFFF;
+    border-radius: 50%;
+    margin: auto;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+.img-touxiang-div>img {
+    width: 100%;
+    height: 100%;
+}
+
+.personal-information {
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.personal-information>div {
+    height: 40px;
+    padding: 5px;
+    box-sizing: border-box;
+    color: #6D6D6D;
+    line-height: 40px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.personal-information>div>span:nth-child(2) {
+    float: right;
+}
+
+.Personnel-details-details-right {
+    float: right;
+    width:73%;
+    height: 100%;
+}
+
+.safety-education-tr1>td:nth-child(2) {
+    width: 40%;
+}
+
+.safety-education {
+    border: 1px solid #F0F0F0;
+    width: 95%;
+    text-align: center;
+    height: 550px;
+    margin-bottom: 20px;
+}
+.safety-education tr td {
+    margin: 0;
+    border: 1px solid #F0F0F0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.safety-education-tr1>td {
+    height: 8%;
+    width: 35px;
+}
+.remarks {
+    height: 8%;
+}
+.exam-content{
+    width: 95%;
+    height: 20%;
+    border: 1px solid #F0F0F0;
+    text-align: center;
+}
+.exam-content input{
+    border: 1px solid #F0F0F0;
+}
+.exam-content tr{
+    border: 1px solid #F0F0F0;
+}
+.corporationperiod{
+    width: 20%;
+}
+.corporationperiod input{
+    border: 1px solid #F0F0F0;
+}
+.exam-content>tr>td{
+    text-align: center;
+    border: 1px solid #F0F0F0;
+}
+.exam-content tr td{
+    border: 1px solid #F0F0F0;
+}
+.constructionname-supervisorname>div{
+    float: left;
+    width: 50%;
+    height: 100%;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+.educational-content{
+    border: none;
+    resize:none;
+    box-sizing: border-box;
+}
+.safety-education input{
+    border: none;
+}
+.exam-content input{
+    border: none;
+}
+.Save-cancel{
+    width:130px;
+    margin: 10px auto 0;
+    display: flex;
+    justify-content: space-between;
+}
+.Save-cancel>button{
+    width: 46px;
+    height: 30px;
+    margin: 0 auto;
+    border: none;
+    border-radius: 5px;
+}
+.safety-education tr .contentname{
+    text-align: left;
+}
+.addImages{
+    width: 100px;
+    height: 100px ;
+    margin: 0 auto;
+    position: relative;
+    left: 0;
+    top: 0;
+    border:1px dashed #1a2226;
+}
+
+.addImages1{
+    width: 100px;
+    height: 100px ;
+    margin: 0 auto;
+    position: relative;
+    left: 0;
+    top: 0;
+    border:1px dashed #1a2226;
+}
+
+.file{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.file1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.text-detail{
+    /* margin-top: 40px; */
+    text-align: center;
+}
+.text-detail>span{
+    font-size: 40px;
+}
+.deleteimgs{
+    width: 20px;
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    z-index: 200;
+    display: none;
+}
+.addImages>img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+.examine{
+    width: 20px;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    z-index: 200;
+    display: none;
+}
+
+
+
+
+.text-detail1{
+    /* margin-top: 40px; */
+    text-align: center;
+}
+.text-detail1>span{
+    font-size: 40px;
+}
+.addImages1>p{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    z-index: 100;
+}
+
+.addImages1>a{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    z-index: 100;
+}
+
+
+.deleteimgs1{
+    width: 20px;
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    z-index: 200;
+    display: none;
+}
+
+.examine1{
+    width: 20px;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    z-index: 200;
+    display: none;
+}
+
+
+.addImagesls>div{
+    margin: 50px auto;
+}
+#index-img1{
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+#index-img2{
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}

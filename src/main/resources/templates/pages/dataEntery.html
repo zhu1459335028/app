@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>杭州地铁SG8-2建筑施工大脑
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../css/common/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--datatables-->
+    <link href="../plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!--bootstrap-validate-->
+    <link rel="stylesheet" href="../plugins/bootstrap-Validate/css/bootstrapValidator.min.css">
+    <!-- datetiempicker -->
+    <link rel="stylesheet" href="../plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <!-- animate -->
+    <link rel="stylesheet" href="../css/common/animate.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <!--[endif]-->
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/dataEntery/dataEntery.css" rel="stylesheet">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition fixed">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-menu">
+                <a href="./index.html" class="btn btn-menu"><i class="iconfont icon-icon-test"></i>首页</a>
+                <a href="./video.html" class="btn btn-menu"><i class="iconfont icon-bofang1"></i>实时视频</a>
+                <a href="./staff.html" class="btn btn-menu"><i class="iconfont icon-renyuanxiaozu"></i>人员管理</a>
+                <a href="./attendManage.html" class="btn btn-menu"><i class="iconfont icon-rili"></i>考勤管理</a>
+                <a href="./equipment.html" class="btn btn-menu"><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>设备管理</a>
+                <a href="./alarm.html" class="btn btn-menu"><i class="iconfont icon-yigaojing"></i>报警记录</a>
+                <a href="./soft.html" class="btn btn-menu"><i class="iconfont icon-anquan"></i>环境安全</a>
+                <a href="./vehicle.html" class="btn btn-menu"><i class="iconfont icon-cheliangguanli"></i>车辆管理</a>
+                <a href="javascript:void(0)" class="btn btn-menu btn-active"><i class="iconfont icon-5"></i>数据录入</a>
+                <a href="./measure.html" class="btn btn-menu"><i class="iconfont icon-cehuichengguoguanli"></i>实时监测</a>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="sign-out"><i class="fa fa-sign-out">退出</i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <section class="content">
+                <ul class="nav nav-tabs vertical-spacing">
+                    <li class="active"><a href="#site-info" data-toggle="tab"> 工地信息 </a></li>
+                    <li><a href="#environment" data-toggle="tab"> 环境安全 </a></li>
+                    <li><a href="#ditch" data-toggle="tab"> 基坑安全 </a></li>
+                    <li><a href="#water-level" data-toggle="tab"> 水位监测 </a></li>
+                    <li><a href="#rainfall-button" data-toggle="tab">设置IO控制器</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="site-info">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="vertical-spacing" style="width: 80%;margin-left: 10%;display: flex;flex-flow: row nowrap;justify-content: flex-start;align-items: center;">
+                                    <h4>开工时间</h4>
+                                    <div class="input-group" style="width: 70%;margin-left: 20px;">
+                                        <input id="site-start-date" type="text" class="form-control" readonly placeholder="选择日期">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="environment">
+                        <div class="row vertical-spacing">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-record" onclick="DataEntery.addEnvRecord(event)">
+                                    <i class="iconfont icon-5"></i>录入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row vertical-spacing">
+                            <div class="col-sm-12">
+                                <table id="env_record_table" class="table table-bordered table-hover" style="width:100%">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="ditch">
+                        <div class="row vertical-spacing">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-record" onclick="DataEntery.addDitchRecord(event)">
+                                    <i class="iconfont icon-5"></i>录入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row vertical-spacing">
+                            <div class="col-sm-12">
+                                <table id="ditch_record_table" class="table table-bordered table-hover">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="water-level">
+                        <div class="row vertical-spacing">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-record" onclick="">
+                                    <i class="iconfont icon-5"></i>录入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row vertical-spacing">
+                            <div class="col-sm-12">
+                                <table id="water_record_table" class="table table-bordered table-hover">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="rainfall-button">
+                        <div class="row vertical-spacing">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-record"  onclick="addbutton()">
+                                    <i class="fa fa-plus"></i>添加IO控制器
+                                </button>
+                            </div>
+                            <div class="buttom-look" style="width: 95%; margin: 0 auto;"  >
+                                <table id="IOcontrol" class="table table-bordered table-hover dataTable no-footer">
+                                    <thead>
+                                    <tr>
+                                        <th>设备类型</th>
+                                        <th>设备ID</th>
+                                        <th>IO名称</th>
+                                        <th>设备名称</th>
+                                        <th>厂家类型</th>
+                                        <th>厂家子类型</th>
+                                        <th>设备状态</th>
+                                        <th>IO控制器路数</th>
+                                        <th>备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="IOcontrol1">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!--rem-->
+<script type="text/javascript" src="../js/util/rem.js"></script>
+<!--jQuery-->
+<script src="../js/common/jquery.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/common/bootstrap.js"></script>
+<!-- FastClick -->
+<script src="../plugins/fastclick/fastclick.js"></script>
+<!-- SlimScroll -->
+<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/common/app.js"></script>
+<!--layer-->
+<script src="../plugins/layer/layer.min.js"></script>
+<!--bootstrap-validate-->
+<script src="../plugins/bootstrap-Validate/js/bootstrapValidator.min.js"></script>
+<!--datatables-->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- daterange picker -->
+<script src="../plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<!-- Feng -->
+<script src="../js/common/Feng.js"></script>
+<!--ajax-object-->
+<script src="../js/common/ajax-object.js"></script>
+<!--common-->
+<script src="../js/common/common.js"></script>
+<script src="../js/dataEntery/dataEntery.js"></script>
+
+<script id="add-environment-record" type="text/html">
+    <form class="form-horizontal" name="environmentForm" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" name="dt" class="form-control datetime" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group hidden">
+            <div class="row">
+                <label class="col-sm-2 control-label">盾构区间</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="tbm_range" type="text" maxlength="30">
+                        <span class="input-group-addon"><i class="fa fa-random"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">PM2.5</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="pm25" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">ug/m³</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">PM10</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="pm10" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">ug/m³</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">噪声</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="noise" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">dB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">温度</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="temperature" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">℃</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">湿度</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="humidity" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">%RH</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">风速</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="windSpeed" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">m/s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">风向</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="windDirection" type="text" maxlength="10">
+                        <span class="input-group-addon">方向</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">风力</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="windPower" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">级</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">检测人</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="rummager" type="text" maxlength="30">
+                        <span class="input-group-addon"><i class="fa fa-user" style="color: #aaaaaa;"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="DataEntery.recordEnvSave()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(DataEntery.layerIndex)">取消</button>
+    </div>
+</script>
+
+<script id="add-ditch-record" type="text/html">
+    <form class="form-horizontal" name="ditchForm" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" name="dt" class="form-control datetime" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">氧气</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="o2" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">一氧化碳</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="co" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">PPM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">硫化氢</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="h2S" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">mg/m³</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">可燃气</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="fireO2" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+                        <span class="input-group-addon">PPM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">盾构区间</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="tbm_range" type="text" maxlength="30">
+                        <span class="input-group-addon"><i class="fa fa-random"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">检测人</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input class="form-control" name="rummager" type="text" maxlength="30">
+                        <span class="input-group-addon"><i class="fa fa-user" style="color: #aaaaaa;"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="DataEntery.recordDitchSave()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(DataEntery.layerIndex)">取消</button>
+    </div>
+</script>
+<script src="../js/util/util.js"></script>
+
+<!--设置淋雨按钮-->
+<script id="buttom-write" type="text/html">
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><b  style="color: red;">*</b>设备id</label>
+            <div class="col-sm-10">
+                <input type="text" id="iodeviceid"  class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label"><b style="color: red;">*</b>IO名称</label>
+            <div class="col-sm-10">
+                <input type="text" id="ioname" class="form-control" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label"><b style="color: red;">*</b>设备名称</label>
+            <div class="col-sm-10">
+                <input type="text" id="devicename" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">IO用户名</label>
+            <div class="col-sm-10">
+                <input type="text" id="username" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">IO密码</label>
+            <div class="col-sm-10">
+                <input type="text"  class="form-control" id="inputPassword3">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label" >厂家子类型</label>
+            <div class="col-sm-10">
+                <input type="text" id="type" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">厂家类型</label>
+            <div class="col-sm-10">
+                <input type="text" id="factory" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label" ><b style="color: red;">*</b>IO控制器路数</label>
+            <div class="col-sm-10">
+                <input type="text" id="road" class="form-control">
+            </div>
+        </div>
+        <div>
+            <label  class="col-sm-2 control-label" style="margin-right: 15px;"><b style="color: red;">*</b>设备类型</label>
+            <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> 喷淋
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 撤离
+            </label>
+        </div>
+    </form>
+        <div class="text-center vertical-spacing" id="IOcontrols">
+            <button class="btn btn-sm btn-primary" id="Add-IO-control" onclick="buttomsave()">保存</button>
+<!--            <button class="btn btn-sm btn-primary" id="amend-IO-control" onclick="buttomsave()">保存</button>-->
+            <button class="btn btn-sm btn-danger" onclick="layer.closeAll()">取消</button>
+        </div>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=11" >
+    <meta name="renderer" content="ie-stand">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!--alifont-->
+
+    <link rel="stylesheet" href="../plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--custom-checkbox-->
+    <link rel="stylesheet" href="../css/common/custom-checkbox.css" />
+    <link rel="stylesheet" href="../css/index/index-tbm.css">
+    <script type="text/javascript" src="../js/util/rem.js"></script>
+    <style>
+        svg:not(:root) {
+            overflow: visible;
+        }
+    </style>
+    <title>杭州地铁SG8-2标文桥区间风井站</title>
+</head>
+<body>
+<div class="container-flex">
+    <div class="top-menu">
+        <select id="tbm-select" class="form-control pull-left"></select>
+        <div id="tbm-video" class="checkbox-custom checkbox-default pull-left">
+            <input type="checkbox" id="RememberMe" checked>
+            <label for="RememberMe">实时视频</label>
+        </div>
+        <button class="btn btn-sm btn-custom pull-right" onclick="history.back()">
+            <i class="iconfont icon-icon-test"></i>
+            主屏
+        </button>
+    </div>
+    <div class="content">
+        <div class="tbm-data">
+            <fieldset class="progress-static">
+                <legend align="center">进度统计</legend>
+                <div class="progress-data">
+                    <div id="circle-progress" class="progress-prevent">
+
+                    </div>
+                    <div class="ring-data">
+
+                    </div>
+                    <div class="mileage-data">
+
+                    </div>
+                </div>
+                <div id="process-chart" class="static">
+
+                </div>
+            </fieldset>
+            <fieldset class="cutterhead-info">
+                <legend align="center">刀盘详情</legend>
+                <div class="cutterhead-content">
+                    <div style="width: 50%;position: relative;">
+                        <div class="cutterhead">
+                            <div id="cutterhead-status" class="status-data"></div>
+                            <hr class="horizontal">
+                            <hr class="sixtydeg">
+                            <hr class="Tsixtydeg">
+                            <div class="in-circle"></div>
+                        </div>
+                    </div>
+                    <div style="width: 24%;position: relative;  left: 0.4rem;">
+                        <div>
+                            <div id="cutterhead-connect-status"></div>
+                            <div id="cutterhead-param"></div>
+                        </div>
+                        <div class="grouting">
+                            <div id="grouting-status" class="status-data"></div>
+                            <hr class="horizontal">
+                            <hr class="vertical">
+                        </div>
+                        <div style="width: 100%" id="gas-content" ></div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="screw-machine">
+                <legend align="center">螺旋机</legend>
+                <div class="screw-content">
+                    <table id="foam-system" class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th> </th>
+                                <th class="text-center">泡沫系统1</th>
+                                <th class="text-center">泡沫系统2</th>
+                                <th class="text-center">泡沫系统3</th>
+                                <th class="text-center">泡沫系统4</th>
+                                <th class="text-center">泡沫系统5</th>
+                                <th class="text-center">泡沫系统6</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <div style="padding: 0.15rem;position: relative;">
+                        <div id="screw-image"></div>
+                        <div id="screw-param"></div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="tbm-scene">
+            <div class="building"></div>
+            <div class="layer-container1"><div id="layer-container" class="layer">
+
+                <div id="weixian2" style="width: 0.14rem; height: 0.14rem;background: red; position: absolute; top: -0.07rem; right: 15%; border-radius: 50%;border:0.02rem solid #FFFFFF;">
+                    <p class="weixian2-text" style=" position: absolute; left: 0.02rem; top: 0.15rem; color: #FFFFFF; width: 0.8rem"></p>
+                    <p class="weixian2-text1" style=" position: absolute; left: 0.02rem; top: 0.28rem; color: #FFFFFF; width: 3rem"></p>
+                </div>
+            </div></div>
+        </div>
+    </div>
+    <div class="current_number">
+    </div>
+</div>
+</body>
+<!--jQuery-->
+<script type="text/javascript" src="../js/common/jquery.js"></script>
+<!--util-->
+<script type="text/javascript" src="../js/util/util.js"></script>
+<script type="text/javascript" src="../js/util/svg.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script type="text/javascript" src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="../plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<!--echarts-->
+<script type="text/javascript" src="../plugins/echarts/echarts.min.js"></script>
+<!--layer-->
+<script type="text/javascript" src="../plugins/layer/layer.min.js"></script>
+<!--registerOCX-->
+<script type="text/javascript" src="../js/common/registerOCX.js"></script>
+<!--circlePrecent-->
+<script type="text/javascript" src="../js/util/circlePrecent.js"></script>
+
+<script type="text/javascript" src="../js/common/Feng.js"></script>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<script type="text/javascript" src="../js/index/index-tbm.js"></script>
+<script type="text/html" id="duntui">
+    <form class="form-horizontal" name="measure-waterLevel" style="padding: 0.2rem;" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">实推阶段</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control1" name="username" type="text" maxlength="30" >
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">推进日期</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" class="form-control datetime form-control8"  readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">推进环数</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control5" name="formControl3" type="text"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" >
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">推进里数</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control3" name="formControl3" type="text"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" >
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">说明</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control4" name="formControl4" type="text" value="" >
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+<!--        <button class="btn btn-sm btn-primary"  onclick="redactSave()">保存</button>-->
+<!--        <button class="btn btn-sm btn-danger" onclick="layer.closeAll()">取消</button>-->
+    </div>
+</script>
+<script type="text/html" id="risk">
+    <form class="form-horizontal" name="measure-waterLevel" style="padding: 0.2rem;" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">危险名称</label>
+                <div class="col-sm-9">
+                    <input class="form-control Name-dangerous" name="Name-dangerous" type="text" >
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="remark" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</script>
+</html>

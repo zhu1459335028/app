@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>杭州地铁SG8-2建筑施工大脑
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../css/common/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--datatables-->
+    <link href="../plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!--bootstrap-validate-->
+    <link rel="stylesheet" href="../plugins/bootstrap-Validate/css/bootstrapValidator.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="../plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <!-- animate -->
+    <link rel="stylesheet" href="../css/common/animate.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <!--[endif]-->
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/measure/measure.css" rel="stylesheet">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition fixed">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-menu">
+                <a href="./index.html" class="btn btn-menu"><i class="iconfont icon-icon-test"></i>首页</a>
+                <a href="./video.html" class="btn btn-menu"><i class="iconfont icon-bofang1"></i>实时视频</a>
+                <a href="./staff.html" class="btn btn-menu"><i class="iconfont icon-renyuanxiaozu"></i>人员管理</a>
+                <a href="./attendManage.html" class="btn btn-menu"><i class="iconfont icon-rili"></i>考勤管理</a>
+                <a href="./equipment.html" class="btn btn-menu"><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>设备管理</a>
+                <a href="./alarm.html" class="btn btn-menu"><i class="iconfont icon-yigaojing"></i>报警记录</a>
+                <a href="./soft.html" class="btn btn-menu"><i class="iconfont icon-anquan"></i>环境安全</a>
+                <a href="./vehicle.html" class="btn btn-menu"><i class="iconfont icon-cheliangguanli"></i>车辆管理</a>
+                <a href="./dataEntery.html" class="btn btn-menu"><i class="iconfont icon-5"></i>数据录入</a>
+                <a href="javascript:void (0)" class="btn btn-menu btn-active"><i class="iconfont icon-cehuichengguoguanli"></i>实时监测</a>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="sign-out"><i class="fa fa-sign-out">退出</i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <section class="content">
+                <ul class="nav nav-tabs vertical-spacing">
+                    <li class="active"><a href="#point" data-toggle="tab"> 点位配置 </a></li>
+                    <li><a href="#info" data-toggle="tab"> 信息录入 </a></li>
+                    <li id="Dungouhuans"><a href="#Each-ring-info" data-toggle="tab">盾构环号录入</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="point">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="measure-drawing">
+                                    <div class="measure-drawing-toolbar">
+                                        <div class="tool-container">
+                                            <div class="btn btn-record file-input">
+                                                <i class="iconfont icon-daoru"></i>
+                                                <input type="file" onchange="MeasureConfig.importImage(event)"/>导入图纸
+                                            </div>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn dropdown-toggle btn-record" id="addPoint" data-toggle="dropdown">
+                                                    <i class="iconfont icon-dingwei"></i>添加点位
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="addPoint"></ul>
+                                            </div>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn dropdown-toggle btn-record" id="setThreshold" data-toggle="dropdown">
+                                                    <i class="iconfont icon-yuzhi"></i>阈值设置
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="setThreshold"></ul>
+                                            </div>
+                                            <button type="button" class="btn btn-record">
+                                                <i class="iconfont icon-jinggao"></i>报警联动
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="info">
+                        <div class="row vertical-spacing">
+                            <div class="pull-right">
+                                <div class="btn btn-record file-input" >
+                                    <i class="iconfont icon-daoru"></i>
+                                    <input type="file" onchange="MeasureData.importExcel(event)" />导入
+                                </div>
+                                <button type="button" class="btn btn-record" onclick="MeasureData.manualInput(event)">
+                                    <i class="iconfont icon-5"></i>手动录入
+                                </button>
+                            </div>
+                            <div class="pull-right" style="width: 10%;margin-right: 3px;">
+                                <select id="point-type" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="measure-data-table" class="table table-bordered table-hover" style="width:100%">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Each-ring-info">
+                        <button type="button" class="btn btn-record" onclick="tanchucengji()" style="float: right;">
+                            <i class="iconfont icon-5"></i>录入环数信息
+                        </button>
+                        <div class="dataTables_length" id="measure-data-table_length">
+                            <div  style="position: relative; top: 50px; width: 200px;">显示 <label>
+                                <select class="form-control input-sm indexsm" onclick="ShowPagesd()">
+                                    <option value="10">10</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </label>条</div>
+                            <div style="float: right; margin: 20px;line-height: 30px;">查询盾构掘进日期&nbsp;&nbsp;:&nbsp;&nbsp;<input type="text"  class="datetimes" readonly="readonly" style="height: 30px; border: 1px solid #ccc; border-radius: 4px;"><i class="iconfont icon-iconset0212" onclick="qingkong()"></i>
+                                </div>
+                        </div>
+                        <div>
+                            <table id="import-shield" class="table table-bordered table-hover dataTable no-footer">
+                                <thead>
+                                <tr>
+                                    <th>管片环号</th>
+                                    <th>掘进日期</th>
+                                    <th>掘进时间</th>
+                                    <th>注浆时间</th>
+                                    <th>注浆方量</th>
+                                    <th>拼装日期</th>
+                                    <th>拼装时间</th>
+                                    <th>盾构主司机</th>
+                                    <th>管片拼装手</th>
+                                    <th>质量主管</th>
+                                    <th>值班工程师</th>
+                                    <th>班组长</th>
+                                    <th>监理工程师</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="dangqianyeshu"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div id="context-menu">
+    <ul class="dropdown-menu" role="menu">
+        <li><a tabindex="-1" name="delete">删除</a></li>
+    </ul>
+</div>
+<!--rem-->
+<script type="text/javascript" src="../js/util/rem.js"></script>
+<!--jQuery-->
+<script src="../js/common/jquery.js"></script>
+<!-- jQuery-ui-->
+<script type="text/javascript" src="../plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/common/bootstrap.js"></script>
+<!-- FastClick -->
+<script src="../plugins/fastclick/fastclick.js"></script>
+<!-- SlimScroll -->
+<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/common/app.js"></script>
+<!--layer-->
+<script src="../plugins/layer/layer.min.js"></script>
+<!--bootstrap-validate-->
+<script src="../plugins/bootstrap-Validate/js/bootstrapValidator.min.js"></script>
+<!--datatables-->
+<script src="../plugins/daterangepicker/moment.min.js"></script>
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!--bootstrap-contextmenu-->
+<script src="../plugins/bootstrap-contextmenu/bootstrap-contextmenu.js"></script>
+<!-- daterange picker -->
+<script src="../plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<script src="../js/measure/bootstrap-paginator.js"></script>
+<!--util-->
+<script src="../js/util/util.js"></script>
+<script src="../js/util/svg.min.js"></script>
+<!-- Feng -->
+<script src="../js/common/Feng.js"></script>
+<!--ajax-object-->
+<script src="../js/common/ajax-object.js"></script>
+<!--common-->
+<script src="../js/common/common.js"></script>
+
+<script src="../js/measure/data.js"></script>
+<script src="../js/measure/config.js"></script>
+
+
+<script id="measure-settlement" type="text/html">
+    <form class="form-horizontal" name="measure-settlement" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" name="dt" class="form-control datetime" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">测点编号</label>
+                <div class="col-sm-9">
+                    <div class="input-group point-code-group">
+                        <span class="input-group-addon prefix-code">DBC</span>
+                        <input class="form-control" name="location_no" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">测点位置</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="location" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">仪器编号</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="equipment_no" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">仪器名称</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="equipment" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">上次变量</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="last_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">本次变量</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="current_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">累计变量</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="accumulate_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">变化速率</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="rate" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="remark" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="MeasureData.save()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(MeasureData.layerIndex)">取消</button>
+    </div>
+</script>
+<script id="measure-inclinometer" type="text/html">
+    <form class="form-horizontal" name="measure-inclinometer" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" name="dt" class="form-control datetime" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">测点编号</label>
+                <div class="col-sm-9">
+                    <div class="input-group point-code-group">
+                        <span class="input-group-addon prefix-code">DBC</span>
+                        <input class="form-control" name="location_no" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">测点位置</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="location" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">仪器编号</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="equipment_no" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">仪器名称</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="equipment" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">深度</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="depth" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">上次累计变量</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="lastaccumulate_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">本次变量</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="current_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">累计变量</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="accumulate_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">变化速率</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="rate" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="remark" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="MeasureData.save()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(MeasureData.layerIndex)">取消</button>
+    </div>
+</script>
+<script id="measure-axialForce" type="text/html">
+    <form class="form-horizontal" name="measure-axialForce" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" name="dt" class="form-control datetime" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">测点编号</label>
+                <div class="col-sm-9">
+                    <div class="input-group point-code-group">
+                        <span class="input-group-addon prefix-code">DBC</span>
+                        <input class="form-control" name="location_no" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">测点位置</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="location" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">仪器编号</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="equipment_no" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">仪器名称</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="equipment" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">上次轴力</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="last_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">本次轴力</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="current_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">变化速率</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="rate" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="remark" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="MeasureData.save()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(MeasureData.layerIndex)">取消</button>
+    </div>
+</script>
+<script id="measure-waterLevel" type="text/html">
+    <form class="form-horizontal" name="measure-waterLevel" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" name="dt" class="form-control datetime" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">测点编号</label>
+                <div class="col-sm-9">
+                    <div class="input-group point-code-group">
+                        <span class="input-group-addon prefix-code">DBC</span>
+                        <input class="form-control" name="location_no" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">测点位置</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="location" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">仪器编号</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="equipment_no" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">仪器名称</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="equipment" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">上次变量</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="last_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">本次变量</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="current_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">累计变量</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="accumulate_val" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">变化速率</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="rate" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">水位埋深</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="waterdepth" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-9">
+                    <input class="form-control" name="remark" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="MeasureData.save()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(MeasureData.layerIndex)">取消</button>
+    </div>
+</script>
+<script id="Ring-number-information" type="text/html">
+    <form class="form-horizontal" name="measure-waterLevel" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">管片环号</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control1" name="username" type="text" maxlength="30"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" >
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">施工单位</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control2" name="formControl2" type="text" value="中铁隧道局集团有限公司">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">监理单位</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control3" name="formControl3" type="text" value="浙江中铁科工程咨询有限公司">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">区间名称</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control4" name="formControl4" type="text" value="二号风井站-义蓬站右线">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">掘进时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" class="form-control datetime form-control5" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">注浆时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" class="form-control datetiment form-control6" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">注浆方量</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control7" name="formControl7" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">拼装时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" class="form-control datetime form-control8"  readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">盾构主司机</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control9" name="formControl9" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">管片拼装手</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control10" name="formControl10" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">质量主管</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control11" name="formControl11" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">值班工程师</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control12" name="formControl12" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">班组长</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control13" name="formControl13" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">监理工程师</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control14" name="formControl14" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">管片生产厂家</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control15" name="formControl15" type="text" maxlength="50" value="浙江省建材集团建筑产业化有限公司">
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="preserve()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.closeAll()">取消</button>
+    </div>
+</script>
+<script id="Ring-number2" type="text/html">
+    <form class="form-horizontal" name="measure-waterLevel" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">管片环号</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control1" name="username" type="text" maxlength="30"   onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" >
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">施工单位</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control2" name="formControl2" type="text" value="中铁隧道局集团有限公司">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">监理单位</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control3" name="formControl3" type="text" value="四川铁科建设监理有限公司">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">区间名称</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control4" name="formControl4" type="text" value="">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">掘进时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" class="form-control datetime form-control5" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">注浆时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" class="form-control datetiment form-control6" readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">注浆方量</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control7" name="formControl7" type="text" maxlength="30">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">拼装时间</label>
+                <div class="col-sm-9">
+                    <div class="input-group date">
+                        <input type="text" class="form-control datetime form-control8"  readonly placeholder="选择日期">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">盾构主司机</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control9" name="formControl9" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">管片拼装手</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control10" name="formControl10" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">质量主管</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control11" name="formControl11" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">值班工程师</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control12" name="formControl12" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">班组长</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control13" name="formControl13" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">监理工程师</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control14" name="formControl14" type="text" maxlength="50">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">管片生产厂家</label>
+                <div class="col-sm-9">
+                    <input class="form-control form-control15" name="formControl15" type="text" maxlength="50" value="浙江裕洋隧道管片制造有限公司">
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary"  onclick="redactSave()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.closeAll()">取消</button>
+    </div>
+</script>
+</body>
+</html>

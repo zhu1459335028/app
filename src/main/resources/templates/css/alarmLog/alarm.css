@@ -1,0 +1,50 @@
+.btn-statistics{
+    background-color: rgb(71,87,139);
+    border: none;
+    font-size: 12px;
+    color: #efefef;
+}
+.date input{
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.date .input-group-addon{
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.alarm-item>div{
+    box-shadow: rgb(204, 204, 204) 3px 3px 3px;
+    border-radius: 5px;
+}
+.alarm-from{
+    display: block;
+    float: left;
+}
+.alarm-info{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.alarm-time{
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.thumbnail>img{
+    height: 150px;
+}
+.icon-pingfenshoucang-{
+    font-size: 0.15rem;
+    color: #888888;
+}
+.star-severity{
+    color: rgb(254,212,74);
+}
+.caption-center{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}

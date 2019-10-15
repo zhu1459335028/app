@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=11" >
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="renderer" content="ie-stand">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!--alifont-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--jbox-->
+    <link rel="stylesheet" href="../plugins/jquery-box/css/jquerybox.css">
+    <!--jQuery-sliderBox-->
+    <link rel="stylesheet" href="../plugins/jSlider/css/jSlider.css">
+    <link rel="stylesheet" href="../css/index/index.css">
+    <title>杭州地铁SG8-2标文桥区间风井站</title>
+</head>
+<body>
+<div class="header">
+    <div class="header-title">
+        <h1>杭州地铁SG8-2标文桥区间风井站</h1>
+    </div>
+    <div class="header-time"></div>
+    <div class="title-tool">
+        <a href="./video.html"><i class="iconfont icon-guanli" title="后台"></i></a>
+        <i class="iconfont icon-h sign-out" title="退出"></i>
+    </div>
+</div>
+<div class="container-flex">
+    <div class="container-content">
+        <div class="content-left">
+            <div id="staff-module" class="module-box staff-module">
+                <h3 class="module-box-header">
+                    <i class="iconfont icon-htmal5icon45"></i>人员管理
+                </h3>
+                <div class="module-box-content">
+                    <div class="between-flex" style="margin-bottom: 10px;">
+                        <div style="width: 30%;">
+                            <div id="percentProgress"></div>
+                            <div class="around-flex">
+                                <div class="text-center data-mo" style="width: 49%;">
+                                    <span id="offLineCount" class="realRecord fontx4">0</span>
+                                    <span class="decorationLable fontx1">应到</span>
+                                </div>
+                                <div class="text-center data-mo" style="width: 49%;">
+                                    <span id="onLineCount" class="realRecord fontx4">0</span>
+                                    <span class="decorationLable fontx1">实到</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="manager-employee"></div>
+                    </div>
+                    <div class="between-flex">
+                        <div class="image-container">
+                            <img id="staff-header" src="">
+                        </div>
+                        <div class="around-flex" style="width: 65%;">
+                            <div class="text-center data-mo" style="width: 33%;">
+                                <span id="onCount" class="realRecord fontx5">0</span>
+                                <span class="decorationLable fontx1">进场</span>
+                            </div>
+                            <div class="text-center data-mo" style="width: 33%;">
+                                <span id="outCount" class="realRecord fontx5">0</span>
+                                <span class="decorationLable fontx1">离场</span>
+                            </div>
+                            <div class="text-center data-mo" style="width: 33%;">
+                                <span id="attendance" class="realRecord fontx5">0</span>
+                                <span class="decorationLable fontx1">在场</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="module-box tbm-module">
+                <h3 class="module-box-header">
+                    <i class="iconfont icon-htmal5icon45"></i>基坑管理
+                </h3>
+                <div class="module-box-content">
+                    <div id="measure-module" class="between-flex fontx2 white-font">
+                        <span><i class="iconfont icon-cehuichengguoguanli"></i>实时监测</span>
+                        <span class="label label-success measure-state">正常</span>
+                    </div>
+                    <div class="between-flex" style="margin-bottom: 8px;">
+                        <div class="image-container">
+                            <img id="ditch-header" src="">
+                        </div>
+                        <div class="text-center" style="width: 30%;margin-left: 10%;">
+                            <div id="inDitch" class="realRecord"></div>
+                            <span class="decorationLable fontx1">在坑</span>
+                        </div>
+                        <div style="width: 30%;text-align: right;">
+                            <span class="evacuate" id="evacuate" onclick="evacuate()">撤离</span>
+                            <span class="evacuate" id="off-line-evacuate" style="background: #cccccc; display: none;" title="设备不在线">撤离</span>
+                            <span class="evacuate" id="cancel" onclick="cancel()" style="display: none; line-height: 0.22rem;">取消报警</span>
+                        </div>
+                    </div>
+                    <div id="ditch-container"></div>
+                </div>
+            </div>
+            <div class="module-box realAlarm-module">
+                <h3 class="module-box-header">
+                    <i class="iconfont icon-htmal5icon45"></i>实时报警
+                </h3>
+                <div class="module-box-content">
+                    <div class="alarm-content">
+                        <table class="table table-bordered table-condensed">
+                            <caption>
+                                <span id="alarm-total">报警总数: 0</span>
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>报警类型</th>
+                                <th>报警详情</th>
+                                <th>报警时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-center">
+            <div class="dashboard-container">
+                <h3>安全施工<span id="construction-days">--</span>天</h3>
+            </div>
+            <div class="content-content">
+                <div class="tab-content">
+                    <div class="tab-pane" id="actualVideo">
+                        <div class="video"></div>
+                        <a href="./video.html" class="moreVideo">更多视频</a>
+                    </div>
+                    <div class="tab-pane" id="emaptab">
+                        <div class="eMap-container">
+                            <div id="Emap" class="Emap-positon"></div>
+                            <div class="select-box">
+                                <select class="form-control">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane  fade in active" id="tbmPosition">
+                        <div class="tbmRange"></div>
+                    </div>
+                    <div class="tab-pane" id="softConstruct">
+                        <div id="report-container" class="row" style="padding: 0.2rem;height: 100%;overflow-y: auto;"></div>
+                    </div>
+                    <div class="tab-pane " id="shipin">
+                        <div class="boxdis" class="row" style="padding: 0.2rem;height: 100%;overflow-y: auto; position: relative;">
+                            <video id="videos" src="../video/杭州天目山~3.mp4" controls="controls" autoplay preload  loop muted width="100%" height="100%"></video>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-menu">
+                    <ul class="nav nav-menu">
+                        <li class="" style="width: 30px; height: 59px;padding-top:7px;box-sizing: border-box; ">
+                            <a href="#shipin" data-toggle="tab">
+                                <i class="fa fa-desktop" aria-hidden="true" style="font-size: 24px;width: 30px;height: 30px; display: inline-block;"></i>
+                                <div class="white-font" style="margin-top: 5px;">视频</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a  href="#actualVideo" data-toggle="tab">
+                                <i class="iconfont icon-shexiangtou theme-font fontx5"></i>
+                                <div class="white-font">监控</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#emaptab" data-toggle="tab">
+                                <i class="iconfont icon-ditu1 theme-font fontx5"></i>
+                                <div class="white-font">施工图</div>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#tbmPosition" data-toggle="tab">
+                                <i class="iconfont icon-suidao theme-font fontx5"></i>
+                                <div class="white-font">盾构</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#softConstruct" data-toggle="tab">
+                                <i class="iconfont icon-icon2 theme-font fontx5"></i>
+                                <div class="white-font">安全报警</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="side-nav">
+                        <i class="iconfont icon-htmal5icon44" style="font-size: 28px;"></i>
+                        <ul style="display: none;">
+                            <li>
+                                <a class="dunGouGongdi" href="./index-tbm.html">
+                                    <i class="iconfont icon-dungoujitezhengdian" title="盾构"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./index-measure.html">
+                                    <i class="iconfont icon-cehuifabuxianshiweizhi" title="测绘"></i>
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="credits">
+                <p>杭州视在数科信息技术有限公司</p>
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="module-box environment-module">
+                <h3 class="module-box-header">
+                    <i class="iconfont icon-htmal5icon45"></i>环境安全 <button id="IOcontrol">启动<br>喷淋</button>
+                </h3>
+                <div class="module-box-content">
+                    <div id="enviroment"></div>
+                </div>
+            </div>
+            <div class="module-box car-module">
+                <h3 class="module-box-header">
+                    <i class="iconfont icon-htmal5icon45"></i>车辆管理
+                </h3>
+                <div class="module-box-content">
+                    <div id="car-table"></div>
+                    <div class="between-flex">
+                        <div class="image-container">
+                            <img id="car-pic" src="">
+                        </div>
+                        <div style="width: 65%;height: 100%;display: flex;flex-flow: column;justify-content: space-between;position: absolute;left: 0;top: 0;margin-left: 35%;">
+                            <div class="between-flex theme-font fontx2">
+                                <span>车辆类型</span>
+                                <span id="car-type" style="width: 60%;">--</span>
+                            </div>
+                            <div class="between-flex theme-font fontx2">
+                                <span>进出场</span>
+                                <span id="car-turnover" style="width: 60%;">--</span>
+                            </div>
+                            <div class="between-flex theme-font fontx2">
+                                <span>进出时间</span>
+                                <span id="car-timedate" style="width: 60%;">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="module-box crane-module">
+                <h3 class="module-box-header">
+                    <i class="iconfont icon-htmal5icon45"></i>起重吊装
+                </h3>
+                <div class="module-box-content">
+                    <div class="crane-video"></div>
+                </div>
+            </div>
+            <div class="module-box perimeter-module">
+                <h3 class="module-box-header">
+                    <i class="iconfont icon-htmal5icon45"></i>周界管理
+                </h3>
+                <div class="module-box-content">
+                    <div class="environment jSlider" id="environment-marquee"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--jQuery-->
+<script type="text/javascript" src="../js/common/jquery.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script type="text/javascript" src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- jQuery-ui-->
+<script type="text/javascript" src="../plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<!--jBox-->
+<script type="text/javascript" src="../plugins/jquery-box/js/jquerybox.js"></script>
+<!--jQuery-sliderBox-->
+<script type="text/javascript" src="../plugins/jSlider/js/jSlider.js"></script>
+<!--nicescroll-->
+<script type="text/javascript" src="../plugins/niceScroll/jquery.nicescroll.min.js"></script>
+<!--echarts-->
+<script type="text/javascript" src="../plugins/echarts/echarts.min.js"></script>
+<!--layer-->
+<script type="text/javascript" src="../plugins/layer/layer.min.js"></script>
+<!--circlePrecent-->
+
+<script type="text/javascript" src="../js/util/circlePrecent.js"></script>
+<!--sliderbar-->
+<script type="text/javascript" src="../plugins/jquery-sliderbar/jquery.sliderBar.min.js"></script>
+<!--registerOCX-->
+<script type="text/javascript" src="../js/common/registerOCX.js"></script>
+<script type="text/javascript" src="../js/util/util.js"></script>
+<script type="text/javascript" src="../js/util/lunar-calendar.js"></script>
+<!--Feng-->
+<script type="text/javascript" src="../js/common/Feng.js"></script>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<script type="text/javascript" src="../js/index/index-vehicle.js"></script>
+<script type="text/javascript" src="../js/index/index-enviroment.js"></script>
+<script type="text/javascript" src="../js/index/index-ditch.js"></script>
+<script type="text/javascript" src="../js/index/index-staff.js"></script>
+<script type="text/javascript" src="../js/index/index.js"></script>
+<script type="text/javascript" src="../js/util/rem.js"></script>
+<script type="text/html" id="image-magnification">
+<img class="image-book">
+</script>
+<script type="text/html" id="IOspray">
+        <div class="showIO">
+        </div>
+</script>
+</html>

@@ -1,0 +1,76 @@
+.checkbox-custom {
+    position: relative;
+    padding: 0 6px;
+    background: none;
+    border: 1px solid #1493E4;
+    border-radius: 3px;
+    width: 88px;
+    height: 30px;
+}
+/*
+将初始的checkbox的样式改变
+*/
+.checkbox-custom input[type="checkbox"] {
+    opacity: 0;/*将初始的checkbox隐藏起来*/
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    margin: -6px 0 0 0;
+    top: 46%;
+    right: 8%;
+}
+/*
+设计新的checkbox，位置
+*/
+.checkbox-custom label:before {
+    content: "";
+    position: absolute;
+    top: 60%;
+    right: 8%;
+    margin-top: -9px;
+    width: 16px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 3px;
+    border: 1px solid #1493E4;
+    background: none;
+}
+/*
+点击初始的checkbox，将新的checkbox关联起来
+*/
+.checkbox-custom input[type="checkbox"]:checked +label:after {
+    position: absolute;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    content: "\e072";
+    top: 48%;
+    right: 6.3%;
+    margin-top: -5px;
+    font-size: 12px;
+    line-height: 1;
+    width: 16px;
+    height: 16px;
+    color: lime;
+}
+.checkbox-custom input[type="checkbox"]:not(:checked) +label:after {
+    position: absolute;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    content: "\e074";
+    top: 48%;
+    right: 6.3%;
+    margin-top: -5px;
+    font-size: 12px;
+    line-height: 1;
+    width: 16px;
+    height: 16px;
+    color: red;
+}
+.checkbox-custom label {
+    cursor: pointer;
+    line-height: 1.2;
+    font-weight: normal;
+    margin-bottom: 0;
+    text-align: left;
+    color: white;
+}

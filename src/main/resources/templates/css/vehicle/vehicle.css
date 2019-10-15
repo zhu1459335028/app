@@ -1,0 +1,108 @@
+.table td{
+    vertical-align: middle !important;
+}
+a{
+    text-decoration: inherit !important;
+    color: #388bff;
+}
+.disabled, .disabled:hover, .disabled:active, .disabled:focus{
+    color: #888888;
+}
+.hide{
+    display: none;
+}
+.vertical-spacing{
+    margin-bottom: 15px;
+}
+.vertical-bx-spacing{
+    margin-bottom: 30px;
+}
+/* 单元格连续纯字母数字强制换行显示 */
+.wordwrap{
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+/* 超长文字单元格省略号显示 */
+.ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+.btn-custom {
+    background-color: rgb(71,87,139);
+    border: none;
+    color: #efefef;
+}
+.btn > .fa{
+    margin-right: 5px;
+}
+.btn-white, .btn-white:hover, .btn-white:focus, .btn-white:active, .open .dropdown-toggle.btn-white {
+    color: inherit;
+    border: 1px solid #d2d2d2 !important;
+    background-color: white;
+}
+table.dataTable thead>tr>th{
+    padding-right: 8px;
+}
+.chart-container{
+    position: relative;
+    padding: 8px;
+    overflow: hidden;
+    background-color: #EDF3F7;
+    border-radius: 8px;
+}
+.chart{
+    width: 100%;
+    height: 350px;
+}
+.chart-tool{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    font-size: 16px;
+    z-index: 1000000;
+}
+.chart-tool span{
+    margin-right: 5px;
+    color: #999999;
+}
+.chart-tool .active{
+    color: #1493E4;
+}
+.chart-date{
+    position: absolute;
+    top: 13px;
+    right: 15px;
+    width: 30%;
+}
+.input-group-addon{
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+}
+#header-image, #body-image {
+    width: 200px;
+    height: auto;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+#header-image > div, #body-image > div{
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+#header-image > div > .fa-trash, #body-image > div > .fa-trash{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 20px;
+    color: red;
+    display: none;
+}
+#header-image > img, #body-image > img{
+    width: 100%;
+    height: auto;
+}

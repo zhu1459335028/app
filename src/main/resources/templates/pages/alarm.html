@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="no-referrer" />
+    <title>杭州地铁SG8-2建筑施工大脑
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../css/common/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--ztree-->
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+    <!-- animate -->
+    <link rel="stylesheet" href="../css/common/animate.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <!--[endif]-->
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/alarmLog/alarm.css" rel="stylesheet">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition fixed">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-menu">
+                <a href="./index.html" class="btn btn-menu"><i class="iconfont icon-icon-test"></i>首页</a>
+                <a href="./video.html" class="btn btn-menu"><i class="iconfont icon-bofang1"></i>实时视频</a>
+                <a href="./staff.html" class="btn btn-menu"><i class="iconfont icon-renyuanxiaozu"></i>人员管理</a>
+                <a href="./attendManage.html" class="btn btn-menu"><i class="iconfont icon-rili"></i>考勤管理</a>
+                <a href="./equipment.html" class="btn btn-menu"><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>设备管理</a>
+                <a href="javascript:void (0)" class="btn btn-menu btn-active"><i class="iconfont icon-yigaojing"></i>报警记录</a>
+                <a href="./soft.html" class="btn btn-menu"><i class="iconfont icon-anquan"></i>环境安全</a>
+                <a href="./vehicle.html" class="btn btn-menu"><i class="iconfont icon-cheliangguanli"></i>车辆管理</a>
+                <a href="./dataEntery.html" class="btn btn-menu"><i class="iconfont icon-5"></i>数据录入</a>
+                <a href="./measure.html" class="btn btn-menu"><i class="iconfont icon-cehuichengguoguanli"></i>实时监测</a>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="sign-out"><i class="fa fa-sign-out">退出</i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <section class="content">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#timelyAlarm" data-toggle="tab"> 实时告警 </a></li>
+                    <li><a href="#operateReport" data-toggle="tab"> 运营报告 </a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="timelyAlarm">
+                        <div class="row" style="margin: 15px 0;">
+                            <div class="col-md-3 col-sm-4">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control datepicker alarmPicker" placeholder="选择日期">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="button" class="btn btn-statistics" onclick="Alarm.alarmStatistics(event)">
+                                    <i class="iconfont icon-shujutongji"></i>数据统计
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div id="alarm-container">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="operateReport">
+                        <div class="row" style="margin: 15px 0;">
+                            <div class="col-md-3 col-sm-4">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control datepicker reportPicker" placeholder="选择日期">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="button" class="btn btn-statistics pull-right" onclick="Alarm.reportStatistics(event)">
+                                    <i class="iconfont icon-shujutongji"></i>数据统计
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div id="report-container">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div id="alarm-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="thumbnail" style="border: none;">
+                    <img src="" style="max-width: 100%;height: auto;display: block;" data-toggle="modal">
+                </div>
+                <div class="caption caption-center">
+                    <div>
+                        <p>
+                            <label class="alarm-from">报警来源：</label>
+                            <span class="alarm-info from">-</span>
+                        </p>
+                        <p>
+                            <label class="alarm-from">报警信息：</label>
+                            <span class="alarm-info info">-</span>
+                        </p>
+                        <p>
+                            <label class="alarm-from">报警时间：</label>
+                            <span class="alarm-time">-</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="report-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="thumbnail" style="border: none;">
+                    <img src="" style="max-width: 100%;height: auto;display: block;" data-toggle="modal">
+                </div>
+                <div class="caption caption-center">
+                    <div>
+                        <p>
+                            <label class="alarm-from">视频通道：</label>
+                            <span class="alarm-info from">-</span>
+                        </p>
+                        <p>
+                            <label class="alarm-from">检查项：</label>
+                            <span class="alarm-info info">-</span>
+                        </p>
+                        <p>
+                            <label class="alarm-from">严重程度：</label>
+                            <span class="alarm-time">-</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="alarmLayer">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <section class="content">
+                <h4>实时告警</h4>
+                <hr>
+                <div class="input-group date" style="width: 25%;">
+                    <input type="text" class="form-control alarmDataFilter" placeholder="选择时间段">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div id="alarmChart" style="height: 100%;"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="reportLayer">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <section class="content">
+                <h4>运营报告</h4>
+                <hr>
+                <div class="input-group date" style="width: 25%;">
+                    <input type="text" class="form-control reportDataFilter" placeholder="选择时间段">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div id="reportPie" style="height: 100%;"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+</script>
+
+<!--rem-->
+<script type="text/javascript" src="../js/util/rem.js"></script>
+<!--jQuery-->
+<script src="../js/common/jquery.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/common/bootstrap.js"></script>
+<!-- FastClick -->
+<script src="../plugins/fastclick/fastclick.js"></script>
+<!-- SlimScroll -->
+<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/common/app.js"></script>
+<!--layer-->
+<script src="../plugins/layer/layer.min.js"></script>
+<!--nicescroll-->
+<script src="../plugins/niceScroll/jquery.nicescroll.min.js"></script>
+<!-- date-range-picker -->
+<script src="../plugins/daterangepicker/moment.min.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap-viewer -->
+<script src="../plugins/bootstrap-viewer/bootstrap.viewer.min.js"></script>
+<!--highcharts-->
+<script src="../plugins/Highcharts-6.1.1/code/highcharts.js"></script>
+<!-- highcharts export -->
+<script src="../plugins/Highcharts-6.1.1/code/modules/exporting.js"></script>
+<script src="../plugins/Highcharts-6.1.1/code/modules/drilldown.js"></script>
+<!--Feng-->
+<script src="../js/common/Feng.js"></script>
+<!--common-->
+<script src="../js/common/common.js"></script>
+<script src="../js/alarmLog/alarm.js"></script>
+</body>
+</html>

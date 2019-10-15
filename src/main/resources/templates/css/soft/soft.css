@@ -1,0 +1,97 @@
+.date input{
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.date .input-group-addon{
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.btn-record{
+    background-color: rgb(71,87,139);
+    border: none;
+    font-size: 12px;
+    color: #efefef;
+}
+.btn-record:last-child{
+    margin-right: 15px;
+}
+.form-horizontal{
+    padding: 15px;
+}
+.form-horizontal .form-group{
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-horizontal .control-label{
+    font-size: 14px;
+    font-weight: normal;
+}
+.input-group .form-control{
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.input-group .input-group-addon{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.vertical-spacing{
+    margin-bottom: 15px;
+}
+.chart-container{
+    position: relative;
+    padding: 8px;
+    overflow: hidden;
+    background-color: #EDF3F7;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.soft-chart{
+    width: 100%;
+    height: 350px;
+}
+input:read-only{
+    background-color: #fff !important;
+}
+.bigpicker{
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(56,139,255);
+    z-index: 100000000;
+}
+input.form-control{
+    border-radius: 4px;
+}
+.threshold-btn{
+    color: #1493E4;
+    font-size: 14px;
+    cursor: default;
+}
+.threshold-btn > i{
+    margin-right: 8px;
+}
+.fieldset-content{
+    padding: 0 15px 15px 15px;
+}
+.threshold-tool{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.threshold-time input{
+    display: inline-block;
+    width: 90%;
+    margin-left: 33px;
+}
+.top-table{
+    font-size: 15px;
+}
+.top-table th{
+
+    height: 40px;
+    color: rgb(27,156,235);
+}
+.tables th,td{
+    color: rgb(27,156,235);
+    text-align: center;
+}

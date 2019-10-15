@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>杭州地铁SG8-2建筑施工大脑
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../css/common/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--datatables-->
+    <link href="../plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+    <!-- datetiempicker -->
+    <link rel="stylesheet" href="../plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <!--echarts-->
+    <script type="text/javascript" src="../plugins/echarts/echarts.min.js"></script>
+    <!--bootstrap-validate-->
+    <link rel="stylesheet" href="../plugins/bootstrap-Validate/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="../plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <!--[endif]-->
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/vehicle/vehicle.css" rel="stylesheet">
+    <link href="../css/equipment/equipment.css" rel="stylesheet">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition fixed">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-menu">
+                <a href="./index.html" class="btn btn-menu"><i class="iconfont icon-icon-test"></i>首页</a>
+                <a href="./video.html" class="btn btn-menu"><i class="iconfont icon-bofang1"></i>实时视频</a>
+                <a href="./staff.html" class="btn btn-menu"><i class="iconfont icon-renyuanxiaozu"></i>人员管理</a>
+                <a href="./attendManage.html" class="btn btn-menu"><i class="iconfont icon-rili"></i>考勤管理</a>
+                <a href="javascript:void (0)" class="btn btn-menu btn-active"><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>设备管理</a>
+                <a href="./alarm.html" class="btn btn-menu"><i class="iconfont icon-yigaojing"></i>报警记录</a>
+                <a href="./soft.html" class="btn btn-menu"><i class="iconfont icon-anquan"></i>环境安全</a>
+                <a href="./vehicle.html" class="btn btn-menu"><i class="iconfont icon-cheliangguanli"></i>车辆管理</a>
+                <a href="./dataEntery.html" class="btn btn-menu"><i class="iconfont icon-5"></i>数据录入</a>
+                <a href="./measure.html" class="btn btn-menu"><i class="iconfont icon-cehuichengguoguanli"></i>实时监测</a>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="sign-out"><i class="fa fa-sign-out">退出</i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="content-wrapper">
+        <div class="equipment-management">
+            <div>
+                <div class="equipment-management-top">
+                    <div class="vehicle-type-box">
+                        <div>设备类型</div>
+                        <label>
+                            <select class="vehicle-type">
+                                 <option value="">全部</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="put-on-records-box"><div>设备备案</div>
+                        <label>
+                            <select class="put-on-records">
+                                <option value="2">全部</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="qualified-box"> <div>有无合格证</div>
+                        <label>
+                          <select class="qualified">
+                              <option value="2">全部</option>
+                              <option value="1">有</option>
+                              <option value="0">无</option>
+                          </select>
+                        </label>
+                    </div>
+                    <button class="btn btn-statistics" style="font-size: 12px; line-height: 16px;" onclick="search()"><i class="fa fa-search"></i>搜索</button>
+                    <button class="btn btn-statistics" style="font-size: 12px; line-height: 16px;" onclick="StopCircle()"><i class="fa fa-stop-circle-o"></i>重置</button>
+
+                    <div class="but-neirong">
+                        <button class="btn btn-statistics" style="width: 64.4px;height: 31px; line-height: 16px;font-size: 12px;margin-right: 10px;" onclick="entering()"><i  class="iconfont icon-5"></i>录入</button>
+                        <button class="btn btn-statistics" style="font-size: 12px; line-height: 16px;" onclick="deletename()"><i class="fa fa-trash">删除</i></button>
+                    </div>
+                </div>
+                <div>显示 <label>
+                    <select class="Show-pages" onclick="showpages()">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                    </select>
+                </label>条</div>
+                <div>
+                    <div class="device-box"><input class="Check-All" type="checkbox" onclick="CheckAll()"><div class="device"> <span>设备名称</span> <span>设备类型</span> <span>设备型号</span> <span>有无合格证</span> <span>检验编号</span> <span>验证日期</span> <span>是否备案</span><span>司机姓名</span><span>司机联系方式</span><span>操作证号</span><span>操作</span></div></div>
+                    <div class="center-block">
+                    </div>
+                    <div style="height: 60px">
+                        <div style="line-height: 60px;float: left">第
+                            <span class="private-sub_pages"></span>页（共<span class="center-Number"></span>页
+                            <span class="center-sum"></span>条数据）
+                        </div>
+                        <div class="paging" style="float: right">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="zhenzheo">
+    <div class="form-menu">
+        <div><div class="dianji_quxiao" onclick="quxiaoneirong()">X</div></div>
+        <div><span>*</span>设备名称 <input class="facilityname"  maxlength="15"></div>
+        <div class="Device_type"><span>*</span>设备类型
+            <div class="Device-add-type">
+                <label>
+                     <select class="devices_type">
+                     </select>
+                 </label>
+                  <a class="Add_type" href="javascript:void(0)" onclick="TianJiaGuanLi()">添加类型</a>
+                  <div class="Device_add_type">
+                      <input class="add_content"  maxlength="15"> <a href="javascript:void(0)" onclick="QueDingTianJia()" style="border: 1px solid #009DD6;">确定</a> <a  onclick="QuXiaoTianJia()" style="border: 1px solid #000000; color: #000;" href="javascript:void(0)">取消</a>
+                  </div>
+            </div>
+        </div>
+
+        <div><span>*</span>设备型号 <input class="quipment-model"  maxlength="15" ></div>
+        <div><span>*</span>有无合格证 <div style="display: inline-block; margin-left: 15px;"> <input class="hegeyes"  type="checkbox" checked>有<input class="hegeno" style="margin-left: 80px;" type="checkbox">无</div>
+        </div>
+        <div class="verification">
+            <div>检验编号<input class="serial_number" maxlength="20" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"></div>
+            <div>检验日期<input class="serial_data datetimepicker" readonly></div>
+            <div class="inspection_img"><input type="file" class="inspection_imgs" accept="image/png, image/jpeg, image/gif, image/jpg" style="opacity: 0">
+            <span>添加检验图片</span>
+                <i class="fa fa-trash shanchutu" style="display: none;color: red;"></i>
+            </div>
+        </div>
+        <div><span>*</span>是否备案 <div style="display: inline-block; margin-left: 30px;"> <input class="beianyes" type="checkbox" checked>是<input class="beianno"  style="margin-left: 80px;" type="checkbox">否</div></div>
+        <div><span>&nbsp;</span>司机姓名<input class="driver_name"  maxlength="10"></div>
+        <div><span>&nbsp;</span>联系方式<input type="text" class="driver_touch"  maxlength="11"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></div>
+        <div><span>&nbsp;</span>操作证号<input class="Operation_number" maxlength="20"  onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"></div>
+        <div class="inspection_img1" style="float: left;">
+            <input type="file" class="inspection_imgs1" accept="image/png, image/jpeg, image/gif, image/jpg" style="opacity: 0">
+            <span>添加驾照图片</span>
+            <i class="fa fa-trash shanchutu1 " style="display: none;color: red;"></i>
+        </div>
+        <div class="inspection_img1s" style="float: right">
+            <input type="file" class="inspection_imgs11s" accept=".doc" style="opacity: 0">
+            <span>添加教育人文件</span>
+            <i class="fa fa-trash shanchutu1s" style="display: none;color: red;"></i>
+        </div>
+        <div class="bnt-aves-delete"><button class="save_keep" style="background:#009DD6;color: #ffffff;" onclick="ShuJiBaoCun()">保存</button><button class="queren" style="background:#009DD6;color: #ffffff;" onclick="affirm()">确认</button> <button onclick="quxiaoneirong()" style="background:#ffffff; border: 1px solid #A4A4A4;">取消</button></div>
+    </div>
+</div>
+
+<!--rem-->
+<script type="text/javascript" src="../js/util/rem.js"></script>
+<!--jQuery-->
+<script src="../js/common/jquery.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/common/bootstrap.js"></script>
+<!-- FastClick -->
+<script src="../plugins/fastclick/fastclick.js"></script>
+<!-- SlimScroll -->
+<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/common/app.js"></script>
+<!--util-->
+<script src="../js/util/util.js"></script>
+<!-- date-range-picker -->
+<script src="../plugins/daterangepicker/moment.min.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- daterange picker -->
+<script src="../plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<!--datatables-->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!--file-upload-->
+<script type="text/javascript" src="../plugins/file-upload/upload.js"></script>
+<script type="text/javascript" src="../js/util/image-upload.js"></script>
+<!--echarts-->
+<script type="text/javascript" src="../plugins/echarts/echarts.min.js"></script>
+<!--bootstrap-validate-->
+<script src="../plugins/bootstrap-Validate/js/bootstrapValidator.min.js"></script>
+<!--layer-->
+<script src="../plugins/layer/layer.min.js"></script>
+<!-- Feng -->
+<script src="../js/common/Feng.js"></script>
+<!--common-->
+<script src="../js/common/common.js"></script>
+<script src="../js/vehicle/vehicle-access.js"></script>
+<script src="../js/vehicle/vehicle-info.js"></script>
+<script src="../js/vehicle/vehicle-count.js"></script>
+<script src="../js/equipment/equipment.js"></script>
+<script id="photograph" type="text/html">
+<form class="center-look">
+<table class="table-box">
+    <tr>
+    <td>设备名称</td>
+    <td class="shebeiming"></td>
+</tr>
+    <tr>
+        <td>设备类型</td>
+        <td class="shebeilei"></td>
+    </tr>
+    <tr>
+        <td>设备型号</td>
+        <td class="shebeixing"></td>
+    </tr>
+    <tr>
+        <td>合格证</td>
+        <td class="hegezheng"></td>
+    </tr>
+    <tr>
+        <td>检验编号</td>
+        <td class="jianyanbian"></td>
+    </tr>
+    <tr>
+        <td>验证日期</td>
+        <td class="yanzhengriqi"></td>
+    </tr>
+    <tr>
+        <td>是否备案</td>
+        <td class="beianjilu"></td>
+    </tr>
+    <tr>
+        <td>司机姓名</td>
+        <td class="sjxm"></td>
+    </tr>
+    <tr>
+        <td>司机联系方式</td>
+        <td class="sjlxfs"></td>
+    </tr>
+    <tr>
+        <td>操作证号</td>
+        <td class="czzh"></td>
+    </tr>
+    <tr>
+        <td>操作人文档</td>
+        <td class="czrwd"></td>
+    </tr>
+</table>
+</form>
+</script>
+<script id="img_looks" type="text/html">
+<form>
+    <img class="img_look" src="">
+</form>
+</script>
+<script id="img_looks1" type="text/html">
+    <form>
+        <iframe class="img_lookword" src=""></iframe>
+    </form>
+</script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>杭州地铁SG8-2建筑施工大脑
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--alibbIcon-->
+    <link rel="stylesheet" href="../font/aliIconfont/iconfont.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/common/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../css/common/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--datatables-->
+    <link href="../plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+    <!-- datetiempicker -->
+    <link rel="stylesheet" href="../plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <!--echarts-->
+    <script type="text/javascript" src="../plugins/echarts/echarts.min.js"></script>
+    <!--bootstrap-validate-->
+    <link rel="stylesheet" href="../plugins/bootstrap-Validate/css/bootstrapValidator.min.css">
+    <!--[if lt IE 9]-->
+    <script src="../js/common/html5shiv.min.js"></script>
+    <script src="../js/common/respond.min.js"></script>
+    <!--[endif]-->
+    <link href="../css/common/style.css" rel="stylesheet">
+    <link href="../css/vehicle/vehicle.css" rel="stylesheet">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition fixed">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-menu">
+                <a href="./index.html" class="btn btn-menu"><i class="iconfont icon-icon-test"></i>首页</a>
+                <a href="./video.html" class="btn btn-menu"><i class="iconfont icon-bofang1"></i>实时视频</a>
+                <a href="./staff.html" class="btn btn-menu"><i class="iconfont icon-renyuanxiaozu"></i>人员管理</a>
+                <a href="./attendManage.html" class="btn btn-menu"><i class="iconfont icon-rili"></i>考勤管理</a>
+                <a href="./equipment.html" class="btn btn-menu"><i class="fa fa-file-text-o"  style="margin-right: 5px;"></i>设备管理</a>
+                <a href="./alarm.html" class="btn btn-menu"><i class="iconfont icon-yigaojing"></i>报警记录</a>
+                <a href="./soft.html" class="btn btn-menu"><i class="iconfont icon-anquan"></i>环境安全</a>
+                <a href="javascript:void (0)" class="btn btn-menu btn-active"><i class="iconfont icon-cheliangguanli"></i>车辆管理</a>
+                <a href="./dataEntery.html" class="btn btn-menu"><i class="iconfont icon-5"></i>数据录入</a>
+                <a href="./measure.html" class="btn btn-menu"><i class="iconfont icon-cehuichengguoguanli"></i>实时监测</a>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="sign-out"><i class="fa fa-sign-out">退出</i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="content-wrapper" style="margin-left: 0;">
+        <div class="container-fluid">
+            <!-- Content Header (Page header) -->
+            <section class="content">
+                <ul class="nav nav-tabs vertical-bx-spacing">
+                    <li class="active"><a href="#vehicle-access" data-toggle="tab"> 进出记录 </a></li>
+                    <li><a href="#vehicle-info" data-toggle="tab"> 车辆信息 </a></li>
+                    <li><a href="#vehicle-count" data-toggle="tab"> 数据统计 </a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="vehicle-access">
+                        <div class="row vertical-spacing">
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">车辆类型</button>
+                                    </div>
+                                    <select id="access-vehicleType" class="form-control vehicleType-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">车牌</button>
+                                    </div>
+                                    <input id="access-carNum" type="text" class="form-control" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">所属公司</button>
+                                    </div>
+                                    <select id="access-company" class="form-control company-select"></select>
+                                </div>
+                            </div>
+                            <!--<div class="col-sm-2">-->
+                                <!--<div class="input-group">-->
+                                    <!--<div class="input-group-btn">-->
+                                        <!--<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">车辆状态</button>-->
+                                    <!--</div>-->
+                                    <!--<select id="access-carState" class="form-control">-->
+                                        <!--<option value="-1">全部</option>-->
+                                        <!--<option>场内</option>-->
+                                        <!--<option>离场</option>-->
+                                        <!--<option>异常</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">进出时间</button>
+                                    </div>
+                                    <input id="access-time" type="text" class="form-control datepicker" autocomplete="off">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-custom" onclick="CarMager_access.searchAccess(event)"><i class="fa fa-search"></i>搜索</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="access-table" class="table table-bordered table-hover"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="vehicle-info">
+                        <div class="row vertical-spacing">
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">车辆类型</button>
+                                    </div>
+                                    <select id="info-vehicleType" class="form-control vehicleType-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">车牌</button>
+                                    </div>
+                                    <input id="info-carNum" type="text" class="form-control" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">所属公司</button>
+                                    </div>
+                                    <select id="info-company" class="form-control company-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-custom" onclick="CarMager_info.searchCarInfo(event)"><i class="fa fa-search"></i>搜索</button>
+                                <button class="btn btn-custom" onclick="CarMager_info.addCarInfo(event)"><i class="fa fa-plus-circle"></i>新增</button>
+                                <button class="btn btn-custom" onclick="CarMager_info.delectCarInfo(event)"><i class="fa fa-close" style="color: red;"></i>删除</button>
+                                <button class="btn btn-custom" id="car-type-config" onclick="CarMager_info.typeConfig(event)" disabled="true"><i class="fa fa-cog"></i>类型配置</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="info-table" class="table table-bordered table-hover"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="vehicle-count">
+                        <div class="row vertical-spacing">
+                            <div class="col-md-4">
+                                <div class="chart-container">
+                                    <div id="numberCount" class="chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="chart-container">
+                                    <div class="chart-tool">
+                                        <span class="active" data-value="0">今日</span>
+                                        <span data-value="1">本周</span>
+                                        <span data-value="2">本月</span>
+                                    </div>
+                                    <div id="accessTypeCount" class="chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="chart-container">
+                                    <div class="chart-tool">
+                                        <span class="active" data-value="0">今日</span>
+                                        <span data-value="1">本周</span>
+                                        <span data-value="2">本月</span>
+                                    </div>
+                                    <div id="companyNumCount" class="chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row vertical-spacing">
+                            <div class="col-sm-6">
+                                <div class="chart-container">
+                                    <div class="chart-date">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control datepicker" placeholder="选择日期">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="accessNumCount" class="chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="chart-container">
+                                    <div class="chart-date">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control datepicker" placeholder="选择日期">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="companyTimesCount" class="chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!--rem-->
+<script type="text/javascript" src="../js/util/rem.js"></script>
+<!--jQuery-->
+<script src="../js/common/jquery.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/common/bootstrap.js"></script>
+<!-- FastClick -->
+<script src="../plugins/fastclick/fastclick.js"></script>
+<!-- SlimScroll -->
+<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/common/app.js"></script>
+<!--util-->
+<script src="../js/util/util.js"></script>
+<!-- date-range-picker -->
+<script src="../plugins/daterangepicker/moment.min.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- daterange picker -->
+<script src="../plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<!--datatables-->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!--file-upload-->
+<script type="text/javascript" src="../plugins/file-upload/upload.js"></script>
+<script type="text/javascript" src="../js/util/image-upload.js"></script>
+<!--echarts-->
+<script type="text/javascript" src="../plugins/echarts/echarts.min.js"></script>
+<!--bootstrap-validate-->
+<script src="../plugins/bootstrap-Validate/js/bootstrapValidator.min.js"></script>
+<!--layer-->
+<script src="../plugins/layer/layer.min.js"></script>
+<!-- Feng -->
+<script src="../js/common/Feng.js"></script>
+<!--common-->
+<script src="../js/common/common.js"></script>
+<script src="../js/vehicle/vehicle-access.js"></script>
+<script src="../js/vehicle/vehicle-info.js"></script>
+<script src="../js/vehicle/vehicle-count.js"></script>
+<!--添加车辆信息-->
+<script id="addCarInfo" type="text/html">
+    <form class="form-horizontal" name="car-info" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">车辆类型</label>
+                <div class="col-sm-8">
+                    <select class="form-control" name="type">
+
+                    </select>
+                    <input class="form-control hide" type="text" name="type">
+                </div>
+                <div class="col-sm-2" style="line-height: 35px;">
+                    <a href="javascript:void(0)" id="type-toggle" data-status="select">添加类型</a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">车牌号</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="plate_number">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">所属公司</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="company">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">联系人</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="contacts">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">联系人电话</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" name="phone">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">车头照片</label>
+                <div class="col-sm-9">
+                    <div id="header-image">
+                        <div>
+                            <input type="file" name="ime-images" multiple="multiple" style="display: none;">
+                            <img src="../image/upload.png" class="img-responsive" alt="车头照片" title="">
+                            <i class="fa fa-trash cancel"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">全车照片</label>
+                <div class="col-sm-9">
+                    <div id="body-image">
+                        <div>
+                            <input type="file" name="ime-images" multiple="multiple" style="display: none;">
+                            <img src="../image/upload.png" class="img-responsive" alt="全车照片" title="">
+                            <i class="fa fa-trash cancel"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="CarMager_info.saveCarInfo()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(CarMager_info.layerIndex)">取消</button>
+    </div>
+</script>
+
+<script id="carTypeConfig" type="text/html">
+    <form class="form-horizontal" name="carTypeConfig" role="form">
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">车辆类型1</label>
+                <div class="col-sm-9">
+                    <select class="form-control typeConfig" name="type1">
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-sm-2 control-label">车辆类型2</label>
+                <div class="col-sm-9">
+                    <select class="form-control typeConfig" name="type2">
+
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="text-center vertical-spacing">
+        <button class="btn btn-sm btn-primary" onclick="CarMager_info.saveTypeConfig()">保存</button>
+        <button class="btn btn-sm btn-danger" onclick="layer.close(CarMager_info.layerIndex)">取消</button>
+    </div>
+</script>
+
+</body>
+</html>
